@@ -1,0 +1,4 @@
+Bluetooth: TX, 2; RX, 3
+Sonar: Trig, 8; Echo, 9
+Servo: Yellow, 10; Red, 5V; Brown, GND
+Motor: pins 4-7
