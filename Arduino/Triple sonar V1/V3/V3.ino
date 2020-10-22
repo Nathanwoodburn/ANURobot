@@ -17,10 +17,10 @@ const int tpin2 = A2; //front sonar
 const int epin2 = A3;
 const int tpin3 = A4; //right sonar
 const int epin3 = A5;
-const int s_W = 3; // Distance to the side walls //will need to adjust these after trying it out think this should be '4'
-const int f_W = 8; // Distance to the front wall
+const int s_W = 4; // Distance to the side walls //will need to adjust these after trying it out think this should be '4'
+const int f_W = 3; // Distance to the front wall
 const int d_v_s = 1; // variations in the distance to the side wall while driving forward
-const int l_t_d = 6; // left turn distance the distance the before turns left
+const int l_t_d = 8; // left turn distance the distance the before turns left
 
 void setup() {
   // put your setup code here, to run once:
@@ -97,6 +97,14 @@ void loop() {
     case '7':
       drive('D');
       break;
+      case 'F':
+      if (sonar(tpin2, epin2) > f_W + 2) {
+        drive('H');
+      }
+      else {
+          HM10.println("Collision Avoidance code stopped your command");
+        }      
+      break;
     case '9':
       drive('S');
       break;
@@ -134,6 +142,7 @@ void loop() {
       HM10.println("Sonar: S");
       HM10.println("Drive forward: 8");
       HM10.println("Drive forward without auto correct: 5");
+      HM10.println("Drive far forward: F");
       HM10.println("Drive slight left: 7");
       HM10.println("Drive slight right: 9");
       HM10.println("Turn left: 4");
@@ -151,7 +160,7 @@ void loop() {
       break;
 
     default:
-    HM10.println("For a list of commands use [?]");
+      HM10.println("For a list of commands use [?]");
       break;
   }
 }
@@ -187,9 +196,10 @@ void Auto()
     if (sonar(tpin1, epin1) > l_t_d)
     {
       //      HM10.println("Double check complete");
-      if (sonar(tpin2, epin2) > f_W) {
+      if (sonar(tpin2, epin2) > f_W + 2) {
         drive('F');
-        drive('H');
+        drive('F');
+        //drive('H');
       }
       drive('L'); //turn left
       //delay(1000); //wait
@@ -250,7 +260,7 @@ void Auto()
   }
   delay(1000); //delay than loop again
 }
-void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; back Q; Short forwards H
+void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; back Q; far forwards H
 {
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
@@ -261,13 +271,13 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       HM10.println("Driving forward. . .");
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
-      delay(2000);
+      delay(1000);
       break;
-      case 'H':
+    case 'H':
       HM10.println("Driving forward. . .");
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
-      delay(500);
+      delay(2000);
       break;
     case 'L':
       HM10.println("Turning left. . .");
@@ -285,7 +295,8 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       HM10.println("Turning around. . .");
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp2, HIGH);
-      delay(4720);
+      //delay(4720);
+      delay(4750);
       break;
     case 'S':
       HM10.println("Drive slight right. . .");
@@ -293,8 +304,8 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       delay(800);
       digitalWrite(rmp1, HIGH);
       delay(200);
-      
-      
+
+
       break;
     case 'D':
       HM10.println("Drive slight left. . .");
