@@ -15,10 +15,10 @@ const int tpin2 = A2; //front sonar
 const int epin2 = A3;
 const int tpin3 = A4; //right sonar
 const int epin3 = A5;
-const int s_W = 4; // Distance to the side walls //will need to adjust these after trying it out think this should be '4'
-const int f_W = 5; // Distance to the front wall
-const int d_v_s = 1; // variations in the distance to the side wall while driving forward
-const int l_t_d = 8; // left turn distance the distance the before turns left
+const float s_W = 4.5; // Distance to the side walls //will need to adjust these after trying it out think this should be '4'
+const float f_W = 5.0; // Distance to the front wall
+const float d_v_s = 0.5; // variations in the distance to the side wall while driving forward
+const float l_t_d = 7.0; // left turn distance the distance the before turns left
 
 void setup() {
   // put your setup code here, to run once:
@@ -73,6 +73,16 @@ void loop() {
         }
       }
       break;
+    case '5':
+      {
+        if (sonar(tpin2, epin2) > f_W) {
+          drive('F'); //go straight forward
+        }
+        else {
+          HM10.println("Collision Avoidance code stopped your command");
+        }
+      }
+      break;
     case '2':
       drive('B');
       break;
@@ -94,10 +104,13 @@ void loop() {
       right_sonar = sonar(tpin3, epin3);
       HM10.println("Left sonar reads:");
       HM10.println(left_sonar);
+      //HM10.println(sonar(tpin1, epin1));
       HM10.println("Front sonar reads:");
       HM10.println(front_sonar);
+      //HM10.println(sonar(tpin2, epin2));
       HM10.println("Right sonar reads:");
       HM10.println(right_sonar);
+      //HM10.println(sonar(tpin3, epin3));
       break;
     case 'A':
       HM10.println("Auto mode starting. . .");
@@ -109,6 +122,7 @@ void loop() {
     case '?':
       HM10.println("Sonar: S");
       HM10.println("Drive forward: 8");
+      HM10.println("Drive forward without auto correct: 5");
       //HM10.println("Drive slight left: 7");
       //HM10.println("Drive slight right: 9");
       HM10.println("Turn left: 4");
@@ -120,8 +134,8 @@ void loop() {
       break;
     case 'I':
       HM10.println("");
-      HM10.println("");
-      HM10.println("");
+      HM10.println("Code made by Nathan Woodburn");
+      HM10.println("For more info on this project goto https://www.anurobot.tk");
       break;
 
     default:
