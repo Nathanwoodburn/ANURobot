@@ -290,9 +290,9 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
     case 'S':
       HM10.println("Drive slight right. . .");
       digitalWrite(lmp1, HIGH);
-      delay(400);
+      delay(800);
       digitalWrite(rmp1, HIGH);
-      delay(600);
+      delay(200);
       
       
       break;
@@ -300,9 +300,9 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       HM10.println("Drive slight left. . .");
       //
       digitalWrite(rmp1, HIGH);
-      delay(400);
+      delay(800);
       digitalWrite(lmp1, HIGH);
-      delay(600);
+      delay(200);
       break;
     case 'Q':
       HM10.println("Driving forward. . .");
