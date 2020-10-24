@@ -347,7 +347,7 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       digitalWrite(lmp1, HIGH);
       delay(500);
       digitalWrite(rmp1, HIGH);
-      delay(200);
+      delay(400);
       //      digitalWrite(lmp1, HIGH);
       //      digitalWrite(rmp2, HIGH);
       //      delay(1250);
@@ -357,7 +357,7 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       digitalWrite(rmp1, HIGH);
       delay(500);
       digitalWrite(lmp1, HIGH);
-      delay(200);
+      delay(400);
       //digitalWrite(lmp2, HIGH);
       //digitalWrite(rmp1, HIGH);
       //delay(1250);
