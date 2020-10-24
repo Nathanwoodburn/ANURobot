@@ -18,7 +18,9 @@ const int epin2 = A3;
 const int tpin3 = A4; //right sonar
 const int epin3 = A5;
 const int s_W = 4; // Distance to the side walls //will need to adjust these after trying it out think this should be '4'
-const int f_W = 3; // Distance to the front wall
+const int f_W = 8; // Distance to the front wall
+const int t_d = 5; //distance required to u-turn
+const int r_t_d = 4; // distance required to turn right
 const int d_v_s = 1; // variations in the distance to the side wall while driving forward
 const int l_t_d = 8; // left turn distance the distance the before turns left
 
@@ -44,7 +46,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   HM10.println("Ready. . ."); //tell the user that the arduino is ready for the next command
   readbt(); //read the user input
-  switch (input_char) // shorter IF else if
+  switch (input_char) // shorter IF/else if
   {
     case '8':
       {
@@ -77,7 +79,11 @@ void loop() {
       break;
     case '5':
       {
-        if (sonar(tpin2, epin2) > f_W) {
+        long f_sonar = sonar(tpin2, epin2);
+        HM10.print("Front sonar reads ");
+        HM10.println(f_sonar);
+        if (f_sonar > f_W) {
+
           drive('F'); //go straight forward
         }
         else {
@@ -86,23 +92,55 @@ void loop() {
       }
       break;
     case '2':
-      drive('B');
+      {
+        long f_sonar = sonar(tpin2, epin2);
+        HM10.print("Front sonar reads ");
+        HM10.println(f_sonar);
+        long l_sonar = sonar(tpin1, epin1);
+        HM10.print("Left sonar reads ");
+        HM10.println(l_sonar);
+        if (f_sonar >= t_d && l_sonar >= r_t_d) //check the wall distances
+        {
+          drive('B');
+        }
+        else
+        {
+          HM10.println("Collision Avoidance code stopped your command");
+        }
+      }
       break;
     case '4':
       drive('L');
       break;
     case '6':
-      drive('R');
+      {
+        long l_sonar = sonar(tpin1, epin1);
+        HM10.print("Left sonar reads ");
+        HM10.println(l_sonar);
+        if (l_sonar < r_t_d)
+        {
+          HM10.println("Collision Avoidance code stopped your command");
+        }
+        else
+        {
+          drive('R');
+        }
+      }
       break;
     case '7':
       drive('D');
       break;
     case 'F':
-      if (sonar(tpin2, epin2) > f_W + 2) {
-        drive('H');
-      }
-      else {
-        HM10.println("Collision Avoidance code stopped your command");
+      {
+        long f_sonar = sonar(tpin2, epin2);
+        HM10.print("Front sonar reads ");
+        HM10.println(f_sonar);
+        if (f_sonar > f_W * 2) {
+          drive('H');
+        }
+        else {
+          HM10.println("Collision Avoidance code stopped your command");
+        }
       }
       break;
     case '9':
@@ -115,19 +153,16 @@ void loop() {
       long left_sonar;
       long front_sonar;
       long right_sonar;
-      delay(1000);
       left_sonar = sonar(tpin1, epin1);
-      delay(1000);
       front_sonar = sonar(tpin2, epin2);
-      delay(1000);
       right_sonar = sonar(tpin3, epin3);
-      HM10.println("Left sonar reads:");
+      HM10.print("Left sonar reads: ");
       HM10.println(left_sonar);
       //HM10.println(sonar(tpin1, epin1));
-      HM10.println("Front sonar reads:");
+      HM10.print("Front sonar reads: ");
       HM10.println(front_sonar);
       //HM10.println(sonar(tpin2, epin2));
-      HM10.println("Right sonar reads:");
+      HM10.print("Right sonar reads: ");
       HM10.println(right_sonar);
       //HM10.println(sonar(tpin3, epin3));
       break;
@@ -155,8 +190,9 @@ void loop() {
       break;
     case 'I':
       HM10.println("");
-      HM10.println("Code made by Nathan Woodburn");
+      HM10.println("Code made by Nathan Woodburn: nathan@woodburn.tk");
       HM10.println("For more info on this project goto https://www.anurobot.tk");
+      HM10.println("For a controller for this rover goto http://bt.njwapps.tk");
       break;
 
     default:
@@ -198,7 +234,6 @@ void Auto()
       //      HM10.println("Double check complete");
       if (sonar(tpin2, epin2) > f_W + 2) {
         drive('F');
-        drive('F');
         //drive('H');
       }
       drive('L'); //turn left
@@ -234,33 +269,41 @@ void Auto()
       //HM10.println("Slight right");
     }
   }
-  else if (left_sonar <= (s_W + 10) && right_sonar > (s_W + 10)) //turn right
+  else if (left_sonar <= (s_W + 2) && right_sonar > r_t_d) //turn right
   {
+
     drive('R');
     //    HM10.println("Turn right");
   }
-  else if (left_sonar > (s_W + 10) && right_sonar > (s_W + 10)) //turn right
+  else if (left_sonar > r_t_d && right_sonar > (s_W + 2)) //turn left
   {
     drive('L');
     //    HM10.println("Turn left");
   }
-  else if (left_sonar > (s_W + 10) && right_sonar <= (s_W + 10)) //turn left
+  else if (left_sonar > r_t_d && right_sonar <= (s_W + 2)) //turn left
   {
     drive('L');
     //    HM10.println("Turn left");
   }
-  else if (left_sonar <= (s_W + 10) && right_sonar <= (s_W + 10)) //turn around
+  else if (left_sonar <= (s_W + 2) && right_sonar <= (s_W + 2)) //turn around
   {
-    drive('B');
+    if (front_sonar < t_d || left_sonar < r_t_d)
+    {
+      drive('Q');
+    }
+    else
+    {
+      drive('B');
+    }
     //    HM10.println("Turn around");
   }
   else
   {
     HM10.println("This isn't supposed to happen!!!"); //An error that means the code if broken ;)
   }
-  delay(1000); //delay than loop again
+  delay(500); //delay than loop again
 }
-void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; back Q; far forwards H
+void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H
 {
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
@@ -283,40 +326,41 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       HM10.println("Turning left. . .");
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp1, HIGH);
-      delay(2500);
+      delay(1100);
       break;
     case 'R':
       HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp2, HIGH);
-      delay(2500);
+      delay(1100);
       break;
     case 'B':
       HM10.println("Turning around. . .");
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp2, HIGH);
       //delay(4720);
-      delay(4900);
+      //delay(4900);
+      delay(2450);
       break;
     case 'S':
       HM10.println("Drive slight right. . .");
-      //      digitalWrite(lmp1, HIGH);
-      //      delay(800);
-      //      digitalWrite(rmp1, HIGH);
-      //      delay(200);
       digitalWrite(lmp1, HIGH);
-      digitalWrite(rmp2, HIGH);
-      delay(1250);
+      delay(500);
+      //digitalWrite(rmp1, HIGH);
+      //delay(200);
+      //      digitalWrite(lmp1, HIGH);
+      //      digitalWrite(rmp2, HIGH);
+      //      delay(1250);
       break;
     case 'D':
       HM10.println("Drive slight left. . .");
-      //      digitalWrite(rmp1, HIGH);
-      //      delay(800);
+      digitalWrite(rmp1, HIGH);
+      delay(500);
       //      digitalWrite(lmp1, HIGH);
       //      delay(200);
-      digitalWrite(lmp2, HIGH);
-      digitalWrite(rmp1, HIGH);
-      delay(1250);
+      //digitalWrite(lmp2, HIGH);
+      //digitalWrite(rmp1, HIGH);
+      //delay(1250);
       break;
     case 'Q':
       HM10.println("Reversing. . .");
