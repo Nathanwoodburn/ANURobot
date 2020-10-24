@@ -232,10 +232,10 @@ void Auto()
     if (sonar(tpin1, epin1) > l_t_d)
     {
       //      HM10.println("Double check complete");
-//      if (sonar(tpin2, epin2) > f_W + 2) {   not sure if needed
-//        drive('F');
-//        //drive('H');
-//      }
+      if (sonar(tpin2, epin2) > f_W + 2) { //  not sure if needed
+        drive('F');
+        //drive('H');
+      }
       drive('L'); //turn left
       //delay(1000); //wait
       if (sonar(tpin2, epin2) > f_W) {
@@ -348,6 +348,8 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       delay(500);
       digitalWrite(rmp1, HIGH);
       delay(400);
+      digitalWrite(lmp1, LOW);
+      delay(500);
       //      digitalWrite(lmp1, HIGH);
       //      digitalWrite(rmp2, HIGH);
       //      delay(1250);
@@ -358,6 +360,8 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       delay(500);
       digitalWrite(lmp1, HIGH);
       delay(400);
+      digitalWrite(rmp1, LOW);
+      delay(500);
       //digitalWrite(lmp2, HIGH);
       //digitalWrite(rmp1, HIGH);
       //delay(1250);
