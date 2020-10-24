@@ -217,89 +217,25 @@ void Auto()
   left_sonar = sonar(tpin1, epin1);
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
-  //  HM10.println("Left sonar reads:"); //tell user the sonar readings
-  //  HM10.println(left_sonar);
-  //  HM10.println("Front sonar reads:");
-  //  HM10.println(front_sonar);
-  //  HM10.println("Right sonar reads:");
-  //  HM10.println(right_sonar);
-  //find the best way to go
-  if (left_sonar > l_t_d) // if the left wall is far enough to be an exit
+  if (front_sonar > f_w)
   {
-    delay(100);
-    //    HM10.println("Found left turn"); //double check sonar
-    //    HM10.println("Double checking");
-    if (sonar(tpin1, epin1) > l_t_d)
-    {
-      //      HM10.println("Double check complete");
-//      if (sonar(tpin2, epin2) > f_W + 2) {   not sure if needed
-//        drive('F');
-//        //drive('H');
-//      }
-      drive('L'); //turn left
-      //delay(1000); //wait
-      if (sonar(tpin2, epin2) > f_W) {
-        drive('F'); //go straight so the arduino won't find the same turn again
-      }
-    }
-    else
-    {
-      //      HM10.println("Misread left turn");
+    drive('F');
+  }
+  else if (left_sonar > s_w + 2)
+  {
+    drive('L');
 
-    }
 
   }
-  else if (front_sonar > f_W) // clear path ahead
+  else if (right_sonar > s_w + 2)
   {
-    //    HM10.println("Driving forward. . .");
-    //    HM10.println("Detecting wall distances. . .");
-    if (left_sonar > (s_W - d_v_s) && left_sonar < (s_W + d_v_s)) // the left wall is about the right distance away
-    {
-      drive('F'); //go forward
-      //HM10.println("Straight forward");
-    }
-    else if (left_sonar <= (s_W - d_v_s)) // the left wall is too close
-    {
-      drive('S'); //go slight right
-      //HM10.println("Slight left");
-    }
-    else if (left_sonar >= (s_W + d_v_s)) // the left wall is too far
-    {
-      drive('D'); //go slight left
-      //HM10.println("Slight right");
-    }
-  }
-  else if (left_sonar <= (s_W + 2) && right_sonar > r_t_d) //turn right
-  {
-
     drive('R');
-    //    HM10.println("Turn right");
-  }
-  else if (left_sonar > r_t_d && right_sonar > (s_W + 2)) //turn left
-  {
-    drive('L');
-    //    HM10.println("Turn left");
-  }
-  else if (left_sonar > r_t_d && right_sonar <= (s_W + 2)) //turn left
-  {
-    drive('L');
-    //    HM10.println("Turn left");
-  }
-  else if (left_sonar <= (s_W + 2) && right_sonar <= (s_W + 2)) //turn around
-  {
-    if (front_sonar < t_d || left_sonar < r_t_d)
-    {
-      drive('Q');
-    }
-    else
-    {
-      drive('B');
-    }
-    //    HM10.println("Turn around");
+
   }
   else
   {
-    HM10.println("This isn't supposed to happen!!!"); //An error that means the code if broken ;)
+    drive('Q');
+    drive('B');
   }
   delay(500); //delay than loop again
 }
