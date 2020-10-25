@@ -217,29 +217,10 @@ void Auto()
   left_sonar = sonar(tpin1, epin1);
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
-  if (front_sonar > f_w)
-  {
-    drive('F');
-  }
-  else if (left_sonar > s_w + 2)
-  {
-    drive('L');
-
-
-  }
-  else if (right_sonar > s_w + 2)
-  {
-    drive('R');
-
-  }
-  else
-  {
-    drive('Q');
-    drive('B');
-  }
+  
   delay(500); //delay than loop again
 }
-void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H
+void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H; turn around a corner left 4; right 6
 {
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
@@ -302,6 +283,16 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       HM10.println("Reversing. . .");
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
+      delay(1000);
+      break;
+      case '4':
+      HM10.println("Turning left. . .");
+      digitalWrite(rmp1, HIGH);
+      delay(1000);
+      break;
+      case '6':
+      HM10.println("Turning right. . .");
+      digitalWrite(lmp1, HIGH);
       delay(1000);
       break;
     default:
