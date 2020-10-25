@@ -1,5 +1,3 @@
-
-
 #include <SoftwareSerial.h>
 // define variables
 SoftwareSerial HM10(2, 3); //TX,RX
