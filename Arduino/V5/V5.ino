@@ -1,14 +1,13 @@
 /*
-   Title: ANU Autonomous Rover
-   Purpose: To deliver a load (of jelly beans)
-            to a patient trapped in a collapsed
-            building by traveling through an air
-            duct autonomously without hitting the
-            walls.
-   For more info goto https://www.anurobot.tech
-   Code By: Nathan Woodburn (nathan@woodburn.tk)
-   Date: 26/10/2020
-*/
+ * Title: ANU Autonomous Rover
+ * Purpose: To deliver a load (of jelly beans)
+ *          to a patient trapped in a collapsed
+ *          building by traveling through an air
+ *          duct autonomously without hitting the
+ *          walls.
+ * Code By: Nathan Woodburn (nathan@woodburn.tk)
+ * Date: 26/10/2020
+ */
 
 #include <SoftwareSerial.h>
 // define variables
