@@ -1,4 +1,13 @@
-
+/*
+ * Title: ANU Autonomous Rover
+ * Purpose: To deliver a load (of jelly beans)
+ *          to a patient trapped in a collapsed
+ *          building by traveling through an air
+ *          duct autonomously without hitting the
+ *          walls.
+ * Code By: Nathan Woodburn (nathan@woodburn.tk)
+ * Date: 26/10/2020
+ */ 
 
 #include <SoftwareSerial.h>
 // define variables
@@ -211,14 +220,42 @@ void readbt()
 }
 void Auto()
 {
-  long left_sonar; //create and set variable to store the Sonar readings
+  long left_sonar; //create variables to store the Sonar readings
   long front_sonar;
   long right_sonar;
-  left_sonar = sonar(tpin1, epin1);
+  left_sonar = sonar(tpin1, epin1); //set sonar variables to sonar reading
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
-  
-  delay(500); //delay than loop again
+  if (left_sonar > l_t_d) //left turn found
+  {
+    drive('4'); //turn left
+  }
+  else if (front_sonar > f_W) //clear path ahead so drive forward
+  {
+    if (left_sonar < s_w) //too close to the left wall
+    {
+      drive('S'); //drive slight right
+    }
+    else if (right_sonar < s_w) //too close to right wall
+    {
+      drive('D'); //drive slight left
+    }
+  }
+  //all else after here happen when wall ahead
+  else if (right_sonar > l_t_d) //right turn found
+  {
+    drive('6'); //turn right
+  }
+  else if (front_sonar > t_d) //if enough room turn around
+  {
+    drive('B'); //u-turn
+  }
+  else
+  {
+    drive('Q'); //reverse
+    drive('B'); //then u-turn
+  }
+  delay(500); //delay than loop again //will take out when finished testing
 }
 void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H; turn around a corner left 4; right 6
 {
@@ -285,12 +322,12 @@ void drive(char dir) //forward F; left L; right R; Turn around B; slight right S
       digitalWrite(rmp2, HIGH);
       delay(1000);
       break;
-      case '4':
+    case '4':
       HM10.println("Turning left. . .");
       digitalWrite(rmp1, HIGH);
       delay(1000);
       break;
-      case '6':
+    case '6':
       HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH);
       delay(1000);
