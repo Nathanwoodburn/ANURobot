@@ -1,0 +1,19 @@
+Bluetooth Module (HM-06):
+TX:2
+RX:3
+
+Motor Controller (H-Bridge SN754410):
+Right motor 1:4
+Right motor 2:5
+Left motor 1:6
+Left motor 2:7
+Left motor enable:8
+Right motor enable:9
+
+Ultrasonic Sensor (HC-SR04):
+Sonar 1 Triger:A0
+Sonar 1 Echo:A1
+Sonar 2 Triger:A2
+Sonar 2 Echo:A3
+Sonar 3 Triger:A4
+Sonar 3 Echo:A5
