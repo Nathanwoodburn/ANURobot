@@ -1,14 +1,14 @@
 /*
- * Title: ANU Autonomous Rover
- * Purpose: To deliver a load (of jelly beans)
- *          to a patient trapped in a collapsed
- *          building by traveling through an air
- *          duct autonomously without hitting the
- *          walls.
- * For more info goto https://www.anurobot.tech
- * Code By: Nathan Woodburn (nathan@woodburn.tk)
- * Date: 26/10/2020
- */ 
+   Title: ANU Autonomous Rover
+   Purpose: To deliver a load (of jelly beans)
+            to a patient trapped in a collapsed
+            building by traveling through an air
+            duct autonomously without hitting the
+            walls.
+   For more info goto https://www.anurobot.tech
+   Code By: Nathan Woodburn (nathan@woodburn.tk)
+   Date: 26/10/2020
+*/
 
 #include <SoftwareSerial.h>
 // define variables
@@ -227,35 +227,55 @@ void Auto()
   left_sonar = sonar(tpin1, epin1); //set sonar variables to sonar reading
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
+  HM10.println("Left:");
+  HM10.println(left_sonar);
+  HM10.println("Front:");
+  HM10.println(front_sonar);
+  HM10.println("Right:");
+  HM10.println(right_sonar);
   if (left_sonar > l_t_d) //left turn found
   {
+    HM10.println("Turn left");
     drive('4'); //turn left
   }
   else if (front_sonar > f_W) //clear path ahead so drive forward
   {
     if (left_sonar < s_w) //too close to the left wall
     {
+      HM10.println("Slight right");
       drive('S'); //drive slight right
     }
     else if (right_sonar < s_w) //too close to right wall
     {
+      HM10.println("Slight left");
       drive('D'); //drive slight left
+    }
+    else
+    {
+      HM10.println("Straight forward");
+      drive('F');
     }
   }
   //all else after here happen when wall ahead
   else if (right_sonar > l_t_d) //right turn found
   {
+    HM10.println("Turn right");
     drive('6'); //turn right
   }
   else if (front_sonar > t_d) //if enough room turn around
   {
+    HM10.println("U-turn");
     drive('B'); //u-turn
   }
   else
   {
+    HM10.println("Reverse");
     drive('Q'); //reverse
+    HM10.println("U-turn");
     drive('B'); //then u-turn
   }
+  HM10.println("Press enter to continue. . .");
+  readbt();
   delay(500); //delay than loop again //will take out when finished testing
 }
 void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H; turn around a corner left 4; right 6
