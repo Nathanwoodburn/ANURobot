@@ -7,8 +7,8 @@
  *          walls.
  * Code By: Nathan Woodburn (nathan@woodburn.tk)
  * For more info goto https://www.anurobot.tk
- * For a Controller goto http://bt.njwapps.tech
- * Date: 26/10/2020
+ * For a Controller goto https://www.njwapps.tech/BT
+ * Date: 27/10/2020
  */ 
 
 #include <SoftwareSerial.h> //add library for the bluetooth serial connection
