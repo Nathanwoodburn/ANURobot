@@ -245,7 +245,7 @@ void readbt() // function to wait for the user to send text then set input_char 
     char junk = HM10.read(); // create a temporary char and get the text from the BT serial port to clear the termainal
   }
 }
-void Auto()
+void Auto() // function to control the rover autonomously
 {
   long left_sonar; //create variables to store the Sonar readings
   long front_sonar;
@@ -306,8 +306,11 @@ void Auto()
   readbt(); // wait until user sends text
   delay(500); //delay than loop again //will take out when finished testing
 }
-void drive(char dir) //forward F; left L; right R; Turn around B; slight right S; slight left D; reverse Q; far forwards H; turn around a corner left 4; right 6
+void drive(char dir) // Function to control the driving of the rover
 {
+  // Commands are as follows:
+  // forward F; left L; right R; Turn around B; slight right S; slight left D;
+  // reverse Q; far forwards H; turn around a corner left 4; right 6
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
   switch (dir) // shorter if/else if
