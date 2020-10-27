@@ -6,7 +6,7 @@
  *          duct autonomously without hitting the
  *          walls.
  * Code By: Nathan Woodburn (nathan@woodburn.tk)
- * For more info goto https://www.anurobot.tech
+ * For more info goto https://www.anurobot.tk
  * For a Controller goto http://bt.njwapps.tech
  * Date: 26/10/2020
  */ 
@@ -228,7 +228,7 @@ void loop() {
       HM10.println("         walls.");
       HM10.println("Code By: Nathan Woodburn (nathan@woodburn.tk)");
       HM10.println("For more info goto https://www.anurobot.tech");
-      HM10.println("For a Controller goto http://bt.njwapps.tech");
+      HM10.println("For a Controller goto http://bt.njwapps.tk");
       HM10.println("Date: 26/10/2020");
       break;
     default: // if the user sent any other text
