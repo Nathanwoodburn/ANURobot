@@ -5,7 +5,7 @@
  *          building by traveling through an air
  *          duct autonomously without hitting the
  *          walls.
- * Code By: Nathan Woodburn (nathan@woodburn.tk)
+ * Code By: Nathan Woodburn (nathan@anurobot.tech)
  * For more info goto https://www.anurobot.tk
  * For a Controller goto https://www.njwapps.tech/BT
  * Date: 27/10/2020
@@ -226,7 +226,7 @@ void loop() {
       HM10.println("         building by traveling through an air");
       HM10.println("         duct autonomously without hitting the");
       HM10.println("         walls.");
-      HM10.println("Code By: Nathan Woodburn (nathan@woodburn.tk)");
+      HM10.println("Code By: Nathan Woodburn (nathan@anurobot.tech)");
       HM10.println("For more info goto https://www.anurobot.tech");
       HM10.println("For a Controller goto https://www.njwapps.tech/BT");
       HM10.println("Date: 27/10/2020");
