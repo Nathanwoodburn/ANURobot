@@ -6,5 +6,7 @@
  *          duct autonomously without hitting the
  *          walls.
  * Code By: Nathan Woodburn (nathan@woodburn.tk)
+ * For more info goto https://www.anurobot.tech
+ * For a Controller goto http://bt.njwapps.tech
  * Date: 26/10/2020
  */ 
