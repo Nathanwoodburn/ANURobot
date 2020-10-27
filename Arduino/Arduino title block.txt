@@ -7,6 +7,6 @@
  *          walls.
  * Code By: Nathan Woodburn (nathan@anurobot.tech)
  * For more info goto https://www.anurobot.tech
- * For a Controller goto https://www.njwapps.tech/BT
+ * For a Controller goto http://bt.njwapps.tech
  * Date: 27/10/2020
  */ 
