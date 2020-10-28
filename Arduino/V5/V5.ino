@@ -130,13 +130,14 @@ void loop() {
         if (r_sonar < r_t_d) // check if there's enough room to turn left
         { // there's not enough room
           HM10.println("Collision Avoidance code stopped your command"); //tell user that the right wall is too close
-          // this makes the user know that the arduino is working prope8ly and not just broken
+          // this makes the user know that the arduino is working properly and not just broken
         }
         else // there's enough room
         {
           drive('L'); // turn left
         }
       }
+      break;
     case '6': // if the user sent 6
       {
         long l_sonar = sonar(tpin1, epin1); // create and set a variable to store the front sonar reading
@@ -333,19 +334,19 @@ void drive(char dir) // Function to control the driving of the rover
       HM10.println("Turning left. . .");
       digitalWrite(lmp2, HIGH); // Turn left motor backwards
       digitalWrite(rmp1, HIGH); // Turn right motor forwards
-      delay(1100); // wait 1.1 sec
+      delay(1500); // wait 1.5 sec
       break;
     case 'R':
       HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
-      delay(1100); // Wiat 1.1 sec
+      delay(1500); // Wiat 1.5 sec
       break;
     case 'B':
       HM10.println("Turning around. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
-      delay(2450); // wait 2.45 sec
+      delay(3200); // wait 3 sec
       break;
     case 'S':
       HM10.println("Drive slight right. . .");
