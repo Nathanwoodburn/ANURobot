@@ -7,7 +7,7 @@
  *          walls.
  * Code By: Nathan Woodburn (nathan@anurobot.tech)
  * For more info goto https://www.anurobot.tech
- * For a Controller goto http://bt.njwapps.tech
+ * For a Controller goto http://bt.anurobot.tech
  * Date: 27/10/2020
  */ 
 
@@ -228,7 +228,7 @@ void loop() {
       HM10.println("         walls.");
       HM10.println("Code By: Nathan Woodburn (nathan@anurobot.tech)");
       HM10.println("For more info goto https://www.anurobot.tech");
-      HM10.println("For a Controller goto http://bt.njwapps.tech");
+      HM10.println("For a Controller goto http://bt.anurobot.tech");
       HM10.println("Date: 27/10/2020");
       break;
     default: // if the user sent any other text
