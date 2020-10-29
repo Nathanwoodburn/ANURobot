@@ -30,7 +30,7 @@ const int epin3 = A5; // & echo
 //define variable to hold input text
 char input_char; //variable to hold the input text send through the BT
 // define constants
-const int s_W = 5; // Distance to the side walls, to make the robot in the centre of the path
+const int s_W = 3; // Distance to the side walls, to make the robot in the centre of the path
 const int f_W = 8; // Distance to the front wall, to make sure that the robot doesn't hit the front wall
 const int t_d = 5; // Distance required to u-turn, between the front wall and the robot
 const int r_t_d = 4; // Distance required to turn, between the side walls and the robot
@@ -176,6 +176,12 @@ void loop() {
       break;
     case '0': // if the user sent 0
       drive('Q'); // reverse
+      break;
+      case 'l':
+      drive('4');
+      break;
+      case 'r':
+      drive('6');
       break;
     case 'S': // if the user sent S
       // create variables to store the sonar readings
@@ -372,12 +378,12 @@ void drive(char dir) // Function to control the driving of the rover
     case '4':
       HM10.println("Turning left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
-      delay(1000); // wait 1 sec
+      delay(3000); // wait 1 sec
       break;
     case '6':
       HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
-      delay(1000); // wait 1 sec
+      delay(3000); // wait 1 sec
       break;
     default:
       break;
