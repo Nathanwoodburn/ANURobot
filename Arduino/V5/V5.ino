@@ -9,7 +9,7 @@
  * For more info goto https://www.anurobot.tech
  * For a Controller goto http://bt.anurobot.tech
  * Date: 27/10/2020
- */ 
+ */
 
 #include <SoftwareSerial.h> //add library for the bluetooth serial connection
 SoftwareSerial HM10(2, 3); //Create a bluetooth serial connection in ports 2 (TX) & 3 (RX)
