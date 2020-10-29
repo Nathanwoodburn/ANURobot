@@ -254,7 +254,7 @@ void readbt() // function to wait for the user to send text then set input_char 
     char junk = HM10.read(); // create a temporary char and get the text from the BT serial port to clear the termainal
   }
 }
-void Auto() // function to control the rover autonomously
+void Auto() // function to control the rover autonomously    Note: All outputs have been commented to stop the BT from crashing
 {
   long left_sonar; //create variables to store the Sonar readings
   long front_sonar;
@@ -263,12 +263,12 @@ void Auto() // function to control the rover autonomously
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
   //tell the user the sonar reading
-  HM10.println("Left:");
-  HM10.println(left_sonar);
-  HM10.println("Front:");
-  HM10.println(front_sonar);
-  HM10.println("Right:");
-  HM10.println(right_sonar);
+//  HM10.println("Left:");
+//  HM10.println(left_sonar);
+//  HM10.println("Front:");
+//  HM10.println(front_sonar);
+//  HM10.println("Right:");
+//  HM10.println(right_sonar);
   if (left_sonar > l_t_d) //left turn found
   {
     while (sonar(tpin2,epin2) < t_a_c - 1)
@@ -281,7 +281,7 @@ void Auto() // function to control the rover autonomously
       if (sonar(tpin2,epin2) > a_f_w){
       drive('O');
       }
-    HM10.println("Turn left");
+    //HM10.println("Turn left");
     drive('4'); //turn left
     if (sonar(tpin2,epin2) > a_f_w)
     {
@@ -292,17 +292,17 @@ void Auto() // function to control the rover autonomously
   {
     if (left_sonar < s_W) //too close to the left wall
     {
-      HM10.println("Slight right");
+      //HM10.println("Slight right");
       drive('S'); //drive slight right
     }
     else if (right_sonar < s_W) //too close to right wall
     {
-      HM10.println("Slight left");
+     // HM10.println("Slight left");
       drive('D'); //drive slight left
     }
     else // right distance from the walls
     {
-      HM10.println("Straight forward");
+      //HM10.println("Straight forward");
       drive('O'); // drive straight ahead
     }
   }
@@ -319,7 +319,7 @@ void Auto() // function to control the rover autonomously
       if (sonar(tpin2,epin2) > a_f_w){
       drive('O');
       }
-    HM10.println("Turn right");
+    //HM10.println("Turn right");
     drive('6'); //turn right
     if (sonar(tpin2,epin2) > a_f_w)
     {
@@ -328,14 +328,14 @@ void Auto() // function to control the rover autonomously
   }
   else if (front_sonar > t_d) //if enough room turn around
   {
-    HM10.println("U-turn");
+    //HM10.println("U-turn");
     drive('B'); //u-turn
   }
   else
   {
-    HM10.println("Reverse");
+   // HM10.println("Reverse");
     drive('Q'); //reverse
-    HM10.println("U-turn");
+   // HM10.println("U-turn");
     drive('B'); //then u-turn
   }
   // temporary code to debug problems
