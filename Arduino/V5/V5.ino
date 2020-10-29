@@ -207,6 +207,9 @@ void loop() {
       // and that the only way to go back to manual mode if by pressing the reset button
       HM10.println("To go to manual mode press the reset button");
       for (;;) { // infinite loop
+        if (HM10.available()){
+          break;
+        }
         Auto(); // Run the autunomous driving code
       }
       break;
@@ -342,6 +345,7 @@ void Auto() // function to control the rover autonomously    Note: All outputs h
   //HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
   //readbt(); // wait until user sends text
   //delay(500); //delay than loop again //will take out when finished testing
+  
 }
 void drive(char dir) // Function to control the driving of the rover
 {
@@ -353,14 +357,14 @@ void drive(char dir) // Function to control the driving of the rover
   switch (dir) // shorter if/else if
   {
     case 'O':
-HM10.println("Driving forward. . .");
+//HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(500); //wait 1 sec
     break;
     case 'F':
-      HM10.println("Driving forward. . .");
+  //    HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
@@ -372,58 +376,58 @@ digitalWrite(lmp2, HIGH);
       delay(500); // wait 1 sec
       break;
     case 'H':
-      HM10.println("Driving forward. . .");
+    //  HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(2000); // wait 2 sec
       break;
     case 'L':
-      HM10.println("Turning left. . .");
+   //   HM10.println("Turning left. . .");
       digitalWrite(lmp2, HIGH); // Turn left motor backwards
       digitalWrite(rmp1, HIGH); // Turn right motor forwards
       delay(1500); // wait 1.5 sec
       break;
     case 'R':
-      HM10.println("Turning right. . .");
+   //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
       delay(1500); // Wiat 1.5 sec
       break;
     case 'B':
-      HM10.println("Turning around. . .");
+    //  HM10.println("Turning around. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
       delay(3200); // wait 3 sec
       break;
     case 'S':
-      HM10.println("Drive slight right. . .");
+    //  HM10.println("Drive slight right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(500); // wait 0.5 sec
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(400); // wait 0.4 sec
       break;
     case 'D':
-      HM10.println("Drive slight left. . .");
+   //   HM10.println("Drive slight left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(500); // wait 0.5 sec
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(400); // wait 0.4 sec
       break;
     case 'Q':
-      HM10.println("Reversing. . .");
+    //  HM10.println("Reversing. . .");
       // turn both motors on backwards
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
       delay(1000); // wait 1 sec
       break;
     case '4':
-      HM10.println("Turning left. . .");
+    //  HM10.println("Turning left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(3000); // wait 1 sec
       break;
     case '6':
-      HM10.println("Turning right. . .");
+   //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(3000); // wait 1 sec
       break;
