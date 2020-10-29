@@ -30,12 +30,14 @@ const int epin3 = A5; // & echo
 //define variable to hold input text
 char input_char; //variable to hold the input text send through the BT
 // define constants
-const int s_W = 3; // Distance to the side walls, to make the robot in the centre of the path
+const int s_W = 4; // Distance to the side walls, to make the robot in the centre of the path
 const int f_W = 8; // Distance to the front wall, to make sure that the robot doesn't hit the front wall
 const int t_d = 5; // Distance required to u-turn, between the front wall and the robot
 const int r_t_d = 4; // Distance required to turn, between the side walls and the robot
 const int d_v_s = 1; // Variations in the distance to the side wall while driving forward
 const int l_t_d = 8; // Left turn distance, the distance the before the robot turns left around a corner
+const int t_a_c = 7; // min distance to turn around corner
+const int a_f_w = 7;
 
 void setup() { // To run once when arduino powered on
   HM10.begin(9600); // start the BT serial port
@@ -269,10 +271,24 @@ void Auto() // function to control the rover autonomously
   HM10.println(right_sonar);
   if (left_sonar > l_t_d) //left turn found
   {
+    while (sonar(tpin2,epin2) < t_a_c - 1)
+    {
+      drive('P');
+    }
+    if (sonar(tpin2,epin2) > a_f_w){
+      drive('O');
+      }
+      if (sonar(tpin2,epin2) > a_f_w){
+      drive('O');
+      }
     HM10.println("Turn left");
     drive('4'); //turn left
+    if (sonar(tpin2,epin2) > a_f_w)
+    {
+      drive('O');
+    }
   }
-  else if (front_sonar > f_W) //clear path ahead so drive forward
+  else if (front_sonar > a_f_w) //clear path ahead so drive forward
   {
     if (left_sonar < s_W) //too close to the left wall
     {
@@ -287,14 +303,28 @@ void Auto() // function to control the rover autonomously
     else // right distance from the walls
     {
       HM10.println("Straight forward");
-      drive('F'); // drive straight ahead
+      drive('O'); // drive straight ahead
     }
   }
   //all else after here happen when wall ahead
   else if (right_sonar > l_t_d) //right turn found
   {
+    while (sonar(tpin2,epin2) < t_a_c - 1)
+    {
+      drive('P');
+    }
+    if (sonar(tpin2,epin2) > a_f_w){
+      drive('O');
+      }
+      if (sonar(tpin2,epin2) > a_f_w){
+      drive('O');
+      }
     HM10.println("Turn right");
     drive('6'); //turn right
+    if (sonar(tpin2,epin2) > a_f_w)
+    {
+      drive('O');
+    }
   }
   else if (front_sonar > t_d) //if enough room turn around
   {
@@ -309,25 +339,37 @@ void Auto() // function to control the rover autonomously
     drive('B'); //then u-turn
   }
   // temporary code to debug problems
-  HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
-  readbt(); // wait until user sends text
-  delay(500); //delay than loop again //will take out when finished testing
+  //HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
+  //readbt(); // wait until user sends text
+  //delay(500); //delay than loop again //will take out when finished testing
 }
 void drive(char dir) // Function to control the driving of the rover
 {
   // Commands are as follows:
   // forward F; left L; right R; Turn around B; slight right S; slight left D;
-  // reverse Q; far forwards H; turn around a corner left 4; right 6
+  // reverse Q; far forwards H; turn around a corner left 4; right 6; small reverse P; small forwards O
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
   switch (dir) // shorter if/else if
   {
+    case 'O':
+HM10.println("Driving forward. . .");
+      // Turn both motors on forwards
+      digitalWrite(lmp1, HIGH);
+      digitalWrite(rmp1, HIGH);
+      delay(500); //wait 1 sec
+    break;
     case 'F':
       HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(1000); //wait 1 sec
+      break;
+      case 'P':
+digitalWrite(lmp2, HIGH);
+      digitalWrite(rmp2, HIGH);
+      delay(500); // wait 1 sec
       break;
     case 'H':
       HM10.println("Driving forward. . .");
