@@ -30715,8 +30715,9 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-btn-4 {padding: 0}
 .u-header .u-btn-5 {padding: 0}
 .u-header .u-image-1 {width: 274px; height: 65px; margin: -65px auto -142px 0} 
-@media (max-width: 1199px){ .u-header .u-btn-4 {width: 112px; height: 24px} }
-
+@media (max-width: 1199px){ .u-header .u-btn-4 {width: 112px; height: 24px}
+.u-header .u-image-1 {width: 226px} }
+@media (max-width: 991px){ .u-header .u-image-1 {width: 226px; margin-top: 20px; margin-right: 0} }
 
 @media (max-width: 575px){ .u-header .u-sheet-1 {min-height: 72px} }
  .u-footer {background-image: none}
