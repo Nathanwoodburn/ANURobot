@@ -30707,7 +30707,12 @@ a.u-link.u-text-hover-grey-90:hover {
 
 /*end-variables sitestylecss*/
  .u-header {background-image: none}
-.u-header .u-sheet-1 {min-height: 72px} 
+.u-header .u-sheet-1 {min-height: 72px}
+.u-header .u-text-1 {font-weight: 700; letter-spacing: 2px; line-height: 2.2; font-size: 1.25rem; text-transform: uppercase; margin: 21px 0 0}
+.u-header .u-btn-1 {padding: 0}
+.u-header .u-btn-2 {padding: 0}
+.u-header .u-btn-3 {padding: 0}
+.u-header .u-btn-4 {padding: 0} 
 
 
 
