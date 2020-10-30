@@ -30707,18 +30707,18 @@ a.u-link.u-text-hover-grey-90:hover {
 
 /*end-variables sitestylecss*/
  .u-header {background-image: none}
-.u-header .u-sheet-1 {min-height: 72px}
+.u-header .u-sheet-1 {min-height: 65px}
 .u-header .u-text-1 {font-weight: 700; letter-spacing: 2px; line-height: 2.2; font-size: 1.25rem; text-transform: uppercase; margin: 21px 0 0}
-.u-header .u-btn-1 {padding: 0}
+.u-header .u-btn-1 {margin-top: 0; padding: 0}
 .u-header .u-btn-2 {padding: 0}
 .u-header .u-btn-3 {padding: 0}
 .u-header .u-btn-4 {padding: 0}
-.u-header .u-btn-5 {width: 112px; height: 24px; padding: 0}
-.u-header .u-btn-6 {padding: 0} 
+.u-header .u-btn-5 {padding: 0}
+.u-header .u-image-1 {width: 274px; height: 65px; margin: -65px auto -142px 0} 
+@media (max-width: 1199px){ .u-header .u-btn-4 {width: 112px; height: 24px} }
 
 
-
-
+@media (max-width: 575px){ .u-header .u-sheet-1 {min-height: 72px} }
  .u-footer {background-image: none}
 .u-footer .u-sheet-1 {min-height: 131px}
 .u-footer .u-text-1 {margin: 49px 631px 0 0}

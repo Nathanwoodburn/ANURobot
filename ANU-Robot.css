@@ -178,9 +178,9 @@
 .u-block-88cb-3 {position: absolute; left: 0; width: 50px; height: 50px; background-image: none}
 .u-block-88cb-4 {position: absolute; right: 0; width: 50px; height: 50px; background-image: none}.u-section-6 {background-image: none; min-height: 944px}
 .u-section-6 .u-text-1 {margin: 30px auto 0}
-.u-section-6 .u-custom-html-1 {min-height: 775px; height: auto; margin-top: 30px; margin-bottom: 30px; margin-left: auto} 
+.u-section-6 .u-custom-html-1 {min-height: 775px; margin-top: 30px; margin-bottom: 30px; margin-left: auto} 
 
-@media (max-width: 1199px){ .u-section-6 .u-custom-html-1 {margin-left: initial} }.u-section-7 {background-image: none}
+@media (max-width: 1199px){ .u-section-6 .u-custom-html-1 {height: auto; margin-left: initial} }.u-section-7 {background-image: none}
 .u-section-7 .u-sheet-1 {min-height: 541px}
 .u-section-7 .u-layout-wrap-1 {margin-top: 60px; margin-bottom: 60px}
 .u-section-7 .u-layout-cell-1 {min-height: 219px}
