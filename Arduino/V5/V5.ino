@@ -231,10 +231,10 @@ void loop() {
       HM10.println("");
       HM10.println("Title: ANU Autonomous Rover");
       HM10.println("Purpose: To deliver a load (of jelly beans)");
-      HM10.println("         to a patient trapped in a collapsed");
-      HM10.println("         building by traveling through an air");
-      HM10.println("         duct autonomously without hitting the");
-      HM10.println("         walls.");
+      HM10.println("           to a patient trapped in a collapsed");
+      HM10.println("           building by traveling through an air");
+      HM10.println("           duct autonomously without hitting the");
+      HM10.println("           walls.");
       HM10.println("Code By: Nathan Woodburn (nathan@anurobot.tech)");
       HM10.println("For more info goto https://anurobot.tech");
       HM10.println("For a Controller goto http://bt.anurobot.tech");
