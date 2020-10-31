@@ -257,8 +257,8 @@ void readbt() // function to wait for the user to send text then set input_char 
     char junk = HM10.read(); // create a temporary char and get the text from the BT serial port to clear the termainal
   }
 }
-void Auto() // function to control the rover autonomously    Note: All outputs have been commented to stop the BT from crashing
-{
+void Auto() // function to control the rover autonomously
+{ //Note: All outputs have been commented to stop the BT from crashing
   long left_sonar; //create variables to store the Sonar readings
   long front_sonar;
   long right_sonar;
