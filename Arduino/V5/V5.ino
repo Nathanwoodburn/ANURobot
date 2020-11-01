@@ -37,7 +37,7 @@ const int r_t_d = 4; // Distance required to turn, between the side walls and th
 const int d_v_s = 1; // Variations in the distance to the side wall while driving forward
 const int l_t_d = 8; // Left turn distance, the distance the before the robot turns left around a corner
 const int t_a_c = 7; // min distance to turn around corner
-const int a_f_w = 2;
+const int a_f_w = 7; //distance to decide there is a wall in front to allow turning without collisitons
 
 void setup() { // To run once when arduino powered on
   HM10.begin(9600); // start the BT serial port
@@ -262,11 +262,11 @@ void Auto() // function to control the rover autonomously
   left_sonar = sonar(tpin1, epin1); //set sonar variables to sonar reading
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
-  //tell the user the sonar reading
+  //tell the user the sonar reading - not in use to stop BT crashing
   //  HM10.println("Left:");
   //  HM10.println(left_sonar);
-    HM10.println("Front:");
-    HM10.println(front_sonar);
+  //  HM10.println("Front:");
+  //  HM10.println(front_sonar);
   //  HM10.println("Right:");
   //  HM10.println(right_sonar);
 
@@ -281,7 +281,7 @@ void Auto() // function to control the rover autonomously
         drive('O');
       }
     }
-    HM10.println("Turn left");
+    //HM10.println("Turn left");
     if (sonar(tpin1, epin1) > l_t_d) {
       drive('4'); //turn left
       for (int i = 3; i > 0; i = i - 1)
@@ -291,24 +291,25 @@ void Auto() // function to control the rover autonomously
           drive('O');
         }
       }
-      delay(2000); // delay 2 secs
+      
     }
     else// wall to the left
     {
-      HM10.println("Abort left turn");
+     // HM10.println("Abort left turn");
     }
   }
 
 
   else if (front_sonar > a_f_w) //clear path ahead so drive forward
   {
-    HM10.println("Forward");
+    //HM10.println("Forward");
+    //note: s_W = 4
     if (left_sonar < s_W) //too close to the left wall
     {
       //HM10.println("Slight right");
       drive('S'); //drive slight right
     }
-    else if (left_sonar > s_W + 1) //too close to right wall
+    else if (left_sonar > s_W) //too close to right wall
     {
       // HM10.println("Slight left");
       drive('D'); //drive slight left
@@ -325,14 +326,14 @@ void Auto() // function to control the rover autonomously
   else if (right_sonar > l_t_d) //right turn found
   {
 
-    for (int i = 4; i > 0; i = i - 1)
-    {
-      if (sonar(tpin2, epin2) > 3)
-      {
-        drive('O');
-      }
-    }
-    HM10.println("Turn Right");
+//    for (int i = 4; i > 0; i = i - 1)
+//    {
+//      if (sonar(tpin2, epin2) > 3)
+//      {
+//        drive('O');
+//      }
+//    }
+    //HM10.println("Turn Right");
     if (sonar(tpin3, epin3) > l_t_d) {
       drive('6'); //turn right
       for (int i = 3; i > 0; i = i - 1)
@@ -353,7 +354,7 @@ void Auto() // function to control the rover autonomously
   else if (front_sonar > t_d) //if enough room turn around
   {
 
-    HM10.println("U-turn");
+    //HM10.println("U-turn");
     drive('B'); //u-turn
   }
 
@@ -362,13 +363,13 @@ void Auto() // function to control the rover autonomously
   {
     // HM10.println("Reverse");
     drive('Q'); //reverse
-    HM10.println("U-turn");
+   // HM10.println("U-turn");
     drive('B'); //then u-turn
   }
   // temporary code to debug problems
   // HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
   //readbt(); // wait until user sends text
-  delay(500); //delay than loop again //will take out when finished testing
+  //delay(500); //delay than loop again //will take out when finished testing
 
 }
 void drive(char dir) // Function to control the driving of the rover
