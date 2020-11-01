@@ -231,10 +231,10 @@ void loop() {
       HM10.println("");
       HM10.println("Title: ANU Autonomous Rover");
       HM10.println("Purpose: To deliver a load (of jelly beans)");
-      HM10.println("           to a patient trapped in a collapsed");
-      HM10.println("           building by traveling through an air");
-      HM10.println("           duct autonomously without hitting the");
-      HM10.println("           walls.");
+      HM10.println("                to a patient trapped in a collapsed");
+      HM10.println("                building by traveling through an air");
+      HM10.println("                duct autonomously without hitting the");
+      HM10.println("                walls.");
       HM10.println("Code By: Nathan Woodburn (nathan@anurobot.tech)");
       HM10.println("For more info goto https://anurobot.tech");
       HM10.println("For a Controller goto http://bt.anurobot.tech");
@@ -265,18 +265,15 @@ void Auto() // function to control the rover autonomously
   //tell the user the sonar reading
   //  HM10.println("Left:");
   //  HM10.println(left_sonar);
-  //  HM10.println("Front:");
-  //  HM10.println(front_sonar);
+    HM10.println("Front:");
+    HM10.println(front_sonar);
   //  HM10.println("Right:");
   //  HM10.println(right_sonar);
 
 
   if (left_sonar > l_t_d) //left turn found
   {
-    while (sonar(tpin2, epin2) < t_a_c - 1)
-    {
-      drive('P');
-    }
+
     for (int i = 4; i > 0; i = i - 1)
     {
       if (sonar(tpin2, epin2) > 3)
@@ -285,26 +282,33 @@ void Auto() // function to control the rover autonomously
       }
     }
     HM10.println("Turn left");
-    drive('4'); //turn left
-    for (int i = 2; i > 0; i = i - 1)
-    {
-      if (sonar(tpin2, epin2) > a_f_w)
+    if (sonar(tpin1, epin1) > l_t_d) {
+      drive('4'); //turn left
+      for (int i = 3; i > 0; i = i - 1)
       {
-        drive('O');
+        if (sonar(tpin2, epin2) > a_f_w)
+        {
+          drive('O');
+        }
       }
+      delay(2000); // delay 2 secs
     }
-
+    else// wall to the left
+    {
+      HM10.println("Abort left turn");
+    }
   }
 
 
   else if (front_sonar > a_f_w) //clear path ahead so drive forward
   {
+    HM10.println("Forward");
     if (left_sonar < s_W) //too close to the left wall
     {
       //HM10.println("Slight right");
       drive('S'); //drive slight right
     }
-    else if (right_sonar < s_W) //too close to right wall
+    else if (left_sonar > s_W + 1) //too close to right wall
     {
       // HM10.println("Slight left");
       drive('D'); //drive slight left
@@ -320,10 +324,7 @@ void Auto() // function to control the rover autonomously
   //all else after here happen when wall ahead
   else if (right_sonar > l_t_d) //right turn found
   {
-    while (sonar(tpin2, epin2) < t_a_c - 1)
-    {
-      drive('P');
-    }
+
     for (int i = 4; i > 0; i = i - 1)
     {
       if (sonar(tpin2, epin2) > 3)
@@ -331,21 +332,28 @@ void Auto() // function to control the rover autonomously
         drive('O');
       }
     }
-
-    drive('6'); //turn right
-    for (int i = 2; i > 0; i = i - 1)
-    {
-      if (sonar(tpin2, epin2) > a_f_w)
+    HM10.println("Turn Right");
+    if (sonar(tpin3, epin3) > l_t_d) {
+      drive('6'); //turn right
+      for (int i = 3; i > 0; i = i - 1)
       {
-        drive('O');
+        if (sonar(tpin2, epin2) > a_f_w)
+        {
+          drive('O');
+        }
       }
+    }
+    else// wall to the left
+    {
+      HM10.println("Abort left turn");
     }
   }
 
 
   else if (front_sonar > t_d) //if enough room turn around
   {
-    //HM10.println("U-turn");
+
+    HM10.println("U-turn");
     drive('B'); //u-turn
   }
 
@@ -354,7 +362,7 @@ void Auto() // function to control the rover autonomously
   {
     // HM10.println("Reverse");
     drive('Q'); //reverse
-    // HM10.println("U-turn");
+    HM10.println("U-turn");
     drive('B'); //then u-turn
   }
   // temporary code to debug problems
