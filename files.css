@@ -4,7 +4,7 @@
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 881px;
+  min-height: 1004px;
 }
 
 .u-section-1 .u-text-1 {
@@ -40,34 +40,42 @@
 }
 
 .u-section-1 .u-text-7 {
-  margin: 20px auto 49px 0;
+  margin: 20px auto 0 0;
 }
 
 .u-section-1 .u-btn-3 {
   padding: 0;
 }
 
+.u-section-1 .u-text-8 {
+  margin: 30px auto 0 0;
+}
+
+.u-section-1 .u-text-9 {
+  margin: 20px auto 60px 0;
+}
+
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 726px;
+    min-height: 828px;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 556px;
+    min-height: 634px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 417px;
+    min-height: 476px;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 287px;
+    min-height: 300px;
   }
 }.u-section-2 {
   background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("images/mountains-nature-landscape_1204-297.jpg");
@@ -109,7 +117,7 @@
   font-size: 0.875rem;
   letter-spacing: 1px;
   margin: 86px auto 0 714px;
-  padding: 22px 77px 22px 76px;
+  padding: 22px 23px 22px 22px;
 }
 
 .u-section-2 .u-btn-4 {
@@ -181,11 +189,26 @@
     margin-left: 294px;
   }
 
+  .u-section-2 .u-btn-2 {
+    margin-top: 20px;
+    margin-left: 294px;
+  }
+
   .u-section-2 .u-btn-3 {
     margin-left: 294px;
   }
 
+  .u-section-2 .u-btn-4 {
+    margin-top: 20px;
+    margin-left: 294px;
+  }
+
   .u-section-2 .u-btn-5 {
+    margin-left: 294px;
+  }
+
+  .u-section-2 .u-btn-6 {
+    margin-top: 20px;
     margin-left: 294px;
   }
 }
@@ -227,6 +250,30 @@
 
 @media (max-width: 575px) {
   .u-section-2 .u-sheet-1 {
-    min-height: 569px;
+    min-height: 755px;
+  }
+
+  .u-section-2 .u-btn-1 {
+    margin-top: 131px;
+  }
+
+  .u-section-2 .u-btn-2 {
+    margin-top: -153px;
+  }
+
+  .u-section-2 .u-btn-3 {
+    margin-top: 179px;
+  }
+
+  .u-section-2 .u-btn-4 {
+    margin-top: -153px;
+  }
+
+  .u-section-2 .u-btn-5 {
+    margin-top: 179px;
+  }
+
+  .u-section-2 .u-btn-6 {
+    margin-top: -153px;
   }
 }
