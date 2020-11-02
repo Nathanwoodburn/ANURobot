@@ -362,6 +362,7 @@ void Auto() // function to control the rover autonomously
   else // else reverse than u-turn
   {
     // HM10.println("Reverse");
+    //readbt();
     drive('Q'); //reverse
    // HM10.println("U-turn");
     drive('B'); //then u-turn
@@ -430,6 +431,12 @@ void drive(char dir) // Function to control the driving of the rover
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(200); // wait 0.5 sec
       digitalWrite(rmp1, HIGH); // turn right motor forwards
+      delay(100); // wait 0.4 sec
+      break;
+      case '3':
+      digitalWrite(lmp2, HIGH); // turn left motor forwards
+      delay(400); // wait 0.5 sec
+      digitalWrite(rmp2, HIGH); // turn right motor forwards
       delay(100); // wait 0.4 sec
       break;
     case 'D':
