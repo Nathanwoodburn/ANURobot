@@ -38,6 +38,8 @@ const int d_v_s = 1; // Variations in the distance to the side wall while drivin
 const int l_t_d = 8; // Left turn distance, the distance the before the robot turns left around a corner
 const int t_a_c = 7; // min distance to turn around corner
 const int a_f_w = 7; //distance to decide there is a wall in front to allow turning without collisitons
+const int t_t = 3000; //time set to turn around a corner while driving autonomously (this is in hundredths of a second
+
 
 void setup() { // To run once when arduino powered on
   HM10.begin(9600); // start the BT serial port
@@ -456,12 +458,12 @@ void drive(char dir) // Function to control the driving of the rover
     case '4':
       //  HM10.println("Turning left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
-      delay(3000); // wait 3 sec
+      delay(t_t); // wait for the prechosen time
       break;
     case '6':
       //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
-      delay(3000); // wait 3 sec
+      delay(t_t); // wait for the prechosen time
       break;
     default:
       break;
