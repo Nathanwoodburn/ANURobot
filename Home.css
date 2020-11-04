@@ -1,13 +1,9 @@
 .u-section-5-1 {
-  background-image: none;
+  background-image: url("https://anurobot.tech/images/acrylicRover2.jpg");
 }
 
 .u-section-5-1 .u-sheet-1 {
   min-height: 627px;
-}
-
-.u-section-5-1 .u-video-1 {
-  margin-left: 0;
 }
 
 .u-section-5-1 .u-text-1 {
@@ -18,13 +14,7 @@
 
 @media (max-width: 1199px) {
   .u-section-5-1 .u-sheet-1 {
-    min-height: 531px;
-  }
-
-  .u-section-5-1 .u-video-1 {
-    left: 0;
-    right: auto;
-    margin-left: initial;
+    min-height: 517px;
   }
 
   .u-section-5-1 .u-text-1 {
@@ -35,7 +25,7 @@
 
 @media (max-width: 991px) {
   .u-section-5-1 .u-sheet-1 {
-    min-height: 567px;
+    min-height: 396px;
   }
 
   .u-section-5-1 .u-text-1 {
@@ -45,11 +35,17 @@
 
 @media (max-width: 767px) {
   .u-section-5-1 .u-sheet-1 {
-    min-height: 498px;
+    min-height: 297px;
   }
 
   .u-section-5-1 .u-text-1 {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-5-1 .u-sheet-1 {
+    min-height: 187px;
   }
 }.u-section-5-2 {
   background-image: none;
@@ -60,13 +56,13 @@
 }
 
 .u-section-5-2 .u-video-1 {
-  width: 1078px;
+  margin-left: 0;
 }
 
 .u-section-5-2 .u-text-1 {
-  font-size: 1.875rem;
+  font-size: 1.25rem;
   font-style: italic;
-  margin: 0 784px 60px 0;
+  margin: 20px auto 60px;
 }
 
 @media (max-width: 1199px) {
@@ -75,25 +71,20 @@
   }
 
   .u-section-5-2 .u-video-1 {
-    width: 570px;
     left: 0;
     right: auto;
+    margin-left: initial;
   }
 
   .u-section-5-2 .u-text-1 {
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 1.875rem;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-5-2 .u-sheet-1 {
     min-height: 567px;
-  }
-
-  .u-section-5-2 .u-video-1 {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .u-section-5-2 .u-text-1 {
@@ -106,18 +97,8 @@
     min-height: 498px;
   }
 
-  .u-section-5-2 .u-video-1 {
-    width: 540px;
-  }
-
   .u-section-5-2 .u-text-1 {
     font-size: 1.25rem;
-  }
-}
-
-@media (max-width: 575px) {
-  .u-section-5-2 .u-video-1 {
-    width: 340px;
   }
 }.u-section-5-3 {
   background-image: none;
@@ -128,44 +109,112 @@
 }
 
 .u-section-5-3 .u-video-1 {
+  width: 1078px;
+}
+
+.u-section-5-3 .u-text-1 {
+  font-size: 1.875rem;
+  font-style: italic;
+  margin: 0 784px 60px 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-5-3 .u-sheet-1 {
+    min-height: 531px;
+  }
+
+  .u-section-5-3 .u-video-1 {
+    width: 570px;
+    left: 0;
+    right: auto;
+  }
+
+  .u-section-5-3 .u-text-1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-5-3 .u-sheet-1 {
+    min-height: 567px;
+  }
+
+  .u-section-5-3 .u-video-1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .u-section-5-3 .u-text-1 {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-5-3 .u-sheet-1 {
+    min-height: 498px;
+  }
+
+  .u-section-5-3 .u-video-1 {
+    width: 540px;
+  }
+
+  .u-section-5-3 .u-text-1 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-5-3 .u-video-1 {
+    width: 340px;
+  }
+}.u-section-5-4 {
+  background-image: none;
+}
+
+.u-section-5-4 .u-sheet-1 {
+  min-height: 627px;
+}
+
+.u-section-5-4 .u-video-1 {
   width: 974px;
   height: 549px;
   margin: 51px auto 0;
 }
 
-.u-section-5-3 .u-text-1 {
+.u-section-5-4 .u-text-1 {
   font-size: 1.875rem;
   font-style: italic;
   margin: -600px 843px 60px 0;
 }
 
 @media (max-width: 1199px) {
-  .u-section-5-3 .u-sheet-1 {
+  .u-section-5-4 .u-sheet-1 {
     min-height: 879px;
   }
 
-  .u-section-5-3 .u-video-1 {
+  .u-section-5-4 .u-video-1 {
     width: 940px;
     margin-top: 565px;
   }
 
-  .u-section-5-3 .u-text-1 {
+  .u-section-5-4 .u-text-1 {
     margin-top: -374px;
     margin-right: 0;
   }
 }
 
 @media (max-width: 991px) {
-  .u-section-5-3 .u-sheet-1 {
+  .u-section-5-4 .u-sheet-1 {
     min-height: 627px;
   }
 
-  .u-section-5-3 .u-video-1 {
+  .u-section-5-4 .u-video-1 {
     width: 720px;
     margin-top: 141px;
   }
 
-  .u-section-5-3 .u-text-1 {
+  .u-section-5-4 .u-text-1 {
     margin-top: -434px;
     margin-left: auto;
     margin-right: auto;
@@ -173,19 +222,19 @@
 }
 
 @media (max-width: 767px) {
-  .u-section-5-3 .u-video-1 {
+  .u-section-5-4 .u-video-1 {
     width: 540px;
     margin-top: 93px;
   }
 
-  .u-section-5-3 .u-text-1 {
+  .u-section-5-4 .u-text-1 {
     font-size: 1.25rem;
     margin-top: -386px;
   }
 }
 
 @media (max-width: 575px) {
-  .u-section-5-3 .u-video-1 {
+  .u-section-5-4 .u-video-1 {
     width: 340px;
   }
 }.u-section-1 {
@@ -729,8 +778,9 @@
 
 .u-section-3 .u-image-1 {
   min-height: 518px;
-  background-image: url("https://raw.githubusercontent.com/Nathanwoodburn/ANURobot/master/images/rover-1.jpg");
+  background-image: url("images/acrylicRover4.jpg");
   background-position: 50% 50%;
+  background-size: 130%;
 }
 
 .u-section-3 .u-container-layout-3 {
