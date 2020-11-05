@@ -1057,23 +1057,29 @@
   background-image: none;
 }.u-section-6 {
   background-image: none;
-  min-height: 944px;
+}
+
+.u-section-6 .u-sheet-1 {
+  min-height: 884px;
 }
 
 .u-section-6 .u-text-1 {
-  margin: 30px auto 0;
+  margin: 0 auto;
 }
 
 .u-section-6 .u-custom-html-1 {
-  min-height: 775px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  margin-left: auto;
+  min-height: 807px;
+  height: auto;
+  margin: 30px 0 0 -11px;
 }
 
 @media (max-width: 1199px) {
+  .u-section-6 {
+    min-height: 944px;
+  }
+
   .u-section-6 .u-custom-html-1 {
-    height: auto;
+    margin-right: initial;
     margin-left: initial;
   }
 }.u-section-7 {
