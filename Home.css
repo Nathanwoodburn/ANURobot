@@ -14,6 +14,7 @@
 
 .u-section-5-1 .u-image-1 {
   height: 543px;
+  animation-duration: 1000ms;
   margin: 0 auto 0 0;
 }
 
@@ -781,11 +782,15 @@
   margin: 20px 0 0;
 }
 
-.u-section-3 .u-image-1 {
+.u-section-3 .u-layout-cell-3 {
   min-height: 518px;
-  background-image: url("images/acrylicRover41.jpg");
-  background-position: 50% 50%;
   background-size: 130%;
+  animation-duration: 1000ms;
+}
+
+.u-section-3 .u-image-1 {
+  background-image: url("images/acrylicRover41.jpg");
+  transition-duration: 1s;
 }
 
 .u-section-3 .u-container-layout-3 {
@@ -852,8 +857,9 @@
     min-height: 214px;
   }
 
-  .u-section-3 .u-image-1 {
+  .u-section-3 .u-layout-cell-3 {
     min-height: 427px;
+    background-position: 50% 50%;
   }
 
   .u-section-3 .u-layout-cell-4 {
@@ -882,7 +888,7 @@
     min-height: 100px;
   }
 
-  .u-section-3 .u-image-1 {
+  .u-section-3 .u-layout-cell-3 {
     min-height: 409px;
   }
 
@@ -934,7 +940,7 @@
     padding-right: 10px;
   }
 
-  .u-section-3 .u-image-1 {
+  .u-section-3 .u-layout-cell-3 {
     min-height: 614px;
   }
 
@@ -995,7 +1001,7 @@
     min-height: 100px;
   }
 
-  .u-section-3 .u-image-1 {
+  .u-section-3 .u-layout-cell-3 {
     min-height: 387px;
   }
 
@@ -1207,6 +1213,7 @@
 .u-section-8 .u-icon-1 {
   height: 48px;
   width: 48px;
+  background-image: none;
   margin: 0 auto 0 0;
 }
 
