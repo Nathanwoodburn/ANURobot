@@ -161,7 +161,7 @@
 
 @media (max-width: 767px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 406px;
+    min-height: 767px;
   }
 
   .u-section-1 .u-text-2 {
@@ -169,7 +169,7 @@
   }
 
   .u-section-1 .u-btn-2 {
-    margin-top: 68px;
+    margin-top: 104px;
   }
 
   .u-section-1 .u-btn-3 {
@@ -190,12 +190,13 @@
 
   .u-section-1 .u-btn-7 {
     margin-top: -153px;
+    margin-bottom: 60px;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 256px;
+    min-height: 756px;
   }
 
   .u-section-1 .u-text-2 {
@@ -203,6 +204,6 @@
   }
 
   .u-section-1 .u-btn-2 {
-    margin-top: 43px;
+    margin-top: 106px;
   }
 }
