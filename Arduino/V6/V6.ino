@@ -30,16 +30,16 @@ const int epin3 = A5; // & echo
 //define variable to hold input text
 char input_char; //variable to hold the input text send through the BT
 // define constants
-const int s_W = 4; // Distance to the side walls, to make the robot in the centre of the path
+const int s_W = 5; // Distance to the side walls, to make the robot in the centre of the path
 const int f_W = 8; // Distance to the front wall, to make sure that the robot doesn't hit the front wall
 const int t_d = 5; // Distance required to u-turn, between the front wall and the robot
 const int r_t_d = 4; // Distance required to turn, between the side walls and the robot
 const int d_v_s = 1; // Variations in the distance to the side wall while driving forward
-const int l_t_d = 8; // Left turn distance, the distance the before the robot turns left around a corner // was 8 maybe 16
+const int l_t_d = 8; // Left turn distance, the distance the before the robot turns left around a corner
 const int t_a_c = 7; // min distance to turn around corner
-const int a_f_w = 7; //distance to decide there is a wall in front to allow turning without collisitons
-const int t_t = 1500; //time set to turn around a corner while driving autonomously (this is in milliseconds
-const int n_t_t = 3200; // time it takes to do a u-turn
+const int a_f_w = 5; //distance to decide there is a wall in front to allow turning without collisitons
+const int t_t = 3000; //time set to turn around a corner while driving autonomously (this is in hundredths of a second
+
 
 void setup() { // To run once when arduino powered on
   HM10.begin(9600); // start the BT serial port
@@ -50,7 +50,6 @@ void setup() { // To run once when arduino powered on
   pinMode(lmp2, OUTPUT);
   pinMode(lme, OUTPUT);
   pinMode(rme, OUTPUT);
-
   HM10.println("Waiting. . ."); // tell user that the ardunio in waiting to connect
   while (!HM10.available()) //Wait for user to respond
   {
@@ -266,14 +265,14 @@ void Auto() // function to control the rover autonomously
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
   //tell the user the sonar reading - not in use to stop BT crashing
-  //    HM10.println("Left:");
-  //    HM10.println(left_sonar);
-  //    HM10.println("Front:");
-  //    HM10.println(front_sonar);
-  //    HM10.println("Right:");
-  //    HM10.println(right_sonar);
+  //  HM10.println("Left:");
+  //  HM10.println(left_sonar);
+  //  HM10.println("Front:");
+  //  HM10.println(front_sonar);
+  //  HM10.println("Right:");
+  //  HM10.println(right_sonar);
 
-  // Turn Left Block
+
   if (left_sonar > l_t_d) //left turn found
   {
 
@@ -294,15 +293,15 @@ void Auto() // function to control the rover autonomously
           drive('O');
         }
       }
+      
     }
     else// wall to the left
     {
-      // HM10.println("Abort left turn");
+     // HM10.println("Abort left turn");
     }
-    //readbt();
   }
 
-  //drive forwards block
+
   else if (front_sonar > a_f_w) //clear path ahead so drive forward
   {
     //HM10.println("Forward");
@@ -326,21 +325,19 @@ void Auto() // function to control the rover autonomously
 
 
   //all else after here happen when wall ahead
-
-  // Right turn block
   else if (right_sonar > l_t_d) //right turn found
   {
 
-    //    for (int i = 4; i > 0; i = i - 1)
-    //    {
-    //      if (sonar(tpin2, epin2) > 3)
-    //      {
-    //        drive('O');
-    //      }
-    //    }
-    //HM10.println("Turn Right");
+//    for (int i = 4; i > 0; i = i - 1)
+//    {
+//      if (sonar(tpin2, epin2) > 3)
+//      {
+//        drive('O');
+//      }
+//    }
+    HM10.println("Turn Right");
     if (sonar(tpin3, epin3) > l_t_d) {
-      while (sonar(tpin2, epin2) < 8)
+      while (sonar(tpin2,epin2) < 9)
       {
         drive('P');
       }
@@ -352,49 +349,32 @@ void Auto() // function to control the rover autonomously
           drive('O');
         }
       }
-
     }
     else// wall to the left
     {
-      //HM10.println("Abort right turn");
+      HM10.println("Abort left turn");
     }
-    //readbt();
   }
 
-  // U-turn Block
+
   else if (front_sonar > t_d) //if enough room turn around
   {
-    HM10.println(sonar(tpin1, epin1));
-    HM10.println(sonar(tpin2, epin2));
-    HM10.println(sonar(tpin3, epin3));
-    if (sonar(tpin2, epin2) > t_d)
-    {
-      HM10.println(sonar(tpin2, epin2));
-      // HM10.println("U-turn");
-      drive('2'); //u-turn
-      HM10.println("U-Turn");
-    }
-    readbt();
+
+    HM10.println("U-turn");
+    drive('B'); //u-turn
   }
+
+
   else // else reverse than u-turn
   {
-    HM10.println(sonar(tpin1, epin1 ));
-    HM10.println(sonar(tpin2, epin2));
-    HM10.println(sonar(tpin3, epin3));
-    if (sonar(tpin2, epin2) > t_d)
-    {
-
-      // HM10.println("Reverse");
-      //readbt();
-      drive('Q'); //reverse
-      // HM10.println("U-turn");
-      drive('2'); //then u-turn
-      HM10.println("U-Turn-Reverse");
-      readbt();
-    }
+     HM10.println("Reverse");
+    //readbt();
+    drive('Q'); //reverse
+    HM10.println("U-turn");
+    drive('B'); //then u-turn
   }
   // temporary code to debug problems
-  //HM10.println("Send any char to continue. . ."); // tell user that robot is waiting
+  // HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
   //readbt(); // wait until user sends text
   //delay(500); //delay than loop again //will take out when finished testing
 
@@ -404,100 +384,90 @@ void drive(char dir) // Function to control the driving of the rover
   // Commands are as follows:
   // forward F; left L; right R; Turn around B; slight right S; slight left D;
   // reverse Q; far forwards H; turn around a corner left 4; right 6; small reverse P; small forwards O
-  // u-turn (version 2): 2
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
   switch (dir) // shorter if/else if
   {
-    case '2':
-      HM10.println("U-Turn");
-      digitalWrite(lmp1, HIGH);
-      delay(500);
-      digitalWrite(rmp2, HIGH);
-      delay(2600);
-      break;
     case 'O':
-      //      HM10.println("Driving forward. . .");
+      //HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(100); //wait 1 sec
       break;
     case 'F':
-      //          HM10.println("Driving forward. . .");
+      //    HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(1000); //wait 1 sec
       break;
     case 'P':
-      //    HM10.println("Drive Forwards");
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
       delay(500); // wait 1 sec
       break;
     case 'H':
-      //        HM10.println("Driving forward. . .");
+      //  HM10.println("Driving forward. . .");
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(2000); // wait 2 sec
       break;
     case 'L':
-      HM10.println("Turning left. . .");
+      //   HM10.println("Turning left. . .");
       digitalWrite(lmp2, HIGH); // Turn left motor backwards
       digitalWrite(rmp1, HIGH); // Turn right motor forwards
       delay(1500); // wait 1.5 sec
       break;
     case 'R':
-      HM10.println("Turning right. . .");
+      //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
       delay(1500); // Wiat 1.5 sec
       break;
     case 'B':
-      HM10.println("Turning around. . .");
+      //  HM10.println("Turning around. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
-      delay(n_t_t); // wait 3 sec
+      delay(3200); // wait 3 sec
       break;
     case 'S':
-      //        HM10.println("Drive slight right. . .");
+      //  HM10.println("Drive slight right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(200); // wait 0.5 sec
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(100); // wait 0.4 sec
       break;
-    case '3':
-
-      digitalWrite(lmp2, HIGH); // turn left motor backwards
+      case '3':
+      digitalWrite(lmp2, HIGH); // turn left motor forwards
       delay(400); // wait 0.5 sec
-      digitalWrite(rmp2, HIGH); // turn right motor backwards
+      digitalWrite(rmp2, HIGH); // turn right motor forwards
       delay(100); // wait 0.4 sec
       break;
     case 'D':
-      //         HM10.println("Drive slight left. . .");
+      //   HM10.println("Drive slight left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(200); // wait 0.5 sec
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(100); // wait 0.4 sec
       break;
     case 'Q':
-      HM10.println("Reversing. . .");
+      //  HM10.println("Reversing. . .");
       // turn both motors on backwards
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
       delay(1000); // wait 1 sec
       break;
     case '4':
-      HM10.println("Turning left. . .");
+      //  HM10.println("Turning left. . .");
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(t_t); // wait for the prechosen time
       break;
     case '6':
-      HM10.println("Turning right. . .");
+      //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // turn left motor forwards
-      delay(t_t + 1000); // wait for the prechosen time
+      delay(t_t); // wait for the prechosen time
       break;
     default:
       break;
