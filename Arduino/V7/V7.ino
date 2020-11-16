@@ -59,8 +59,7 @@ void setup() { // To run once when arduino powered on
   }
   input_char = HM10.read(); //read the user input to clear the input terminal
 }
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop() {  // main code loop, to run repeatedly
   HM10.println("Ready. . ."); //tell the user that the arduino is ready to control
   readbt(); //read the user input
   switch (input_char) // shorter IF/else if
@@ -207,7 +206,7 @@ void loop() {
     case 'A': // if the user sent A
       HM10.println("Auto mode starting. . ."); // tell the user that Auto mode is starting
       // and that the only way to go back to manual mode if by pressing the reset button
-      HM10.println("To go to manual mode press the reset button");
+      HM10.println("To exit AUTO mode press the reset button");
       for (;;) { // infinite loop
         Auto(); // Run the autunomous driving code
       }
@@ -222,6 +221,8 @@ void loop() {
       HM10.println("Drive slight right: 9");
       HM10.println("Turn left: 4");
       HM10.println("Turn right: 6");
+      HM10.println("Turn left around corner: l");
+      HM10.println("Turn right around corner: r");
       HM10.println("Turn around: 2");
       HM10.println("Reverse: 0 (Warning not safe in duct)");
       HM10.println("Autonomous mode: A");
