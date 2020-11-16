@@ -18806,7 +18806,7 @@ a.u-button-style.u-border-20 {
 }
 /*begin-variables font-family*/
 .u-body {
-  font-family: 'Open Sans',sans-serif;
+  font-family: Lobster,cursive;
 }
 h1,
 h2,
@@ -18834,7 +18834,7 @@ h6 {
 /*end-variables color*/
 /*begin-variables font*/
 .u-custom-font.u-text-font {
-  font-family: 'Open Sans',sans-serif !important;
+  font-family: Lobster,cursive !important;
 }
 .u-custom-font.u-heading-font {
   font-family: Roboto,sans-serif !important;
@@ -31136,6 +31136,10 @@ a.u-link.u-text-hover-grey-90:hover {
   margin: -51px 0 -66px auto;
 }
 
+.u-header .u-nav-1 {
+  font-size: 1.25rem;
+}
+
 .u-header .u-nav-2 {
   font-size: 1.25rem;
 }
@@ -31206,10 +31210,12 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-footer .u-btn-1 {
+  font-size: 1.125rem;
   padding: 0;
 }
 
 .u-footer .u-text-2 {
+  font-size: 1.125rem;
   margin: -22px 0 60px 510px;
 }
 @media (max-width: 1199px) {
@@ -31228,7 +31234,7 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 @media (max-width: 991px) {
   .u-footer .u-sheet-1 {
-    min-height: 76px;
+    min-height: 127px;
   }
 
   .u-footer .u-text-1 {
@@ -31236,14 +31242,15 @@ a.u-link.u-text-hover-grey-90:hover {
   }
 
   .u-footer .u-text-2 {
-    margin-top: 20px;
-    margin-right: 211px;
-    margin-left: 0;
+    width: auto;
+    margin-top: -28px;
+    margin-bottom: 2px;
+    margin-left: 211px;
   }
 }
 @media (max-width: 767px) {
   .u-footer .u-sheet-1 {
-    min-height: 57px;
+    min-height: 105px;
   }
 
   .u-footer .u-text-1 {
@@ -31251,21 +31258,25 @@ a.u-link.u-text-hover-grey-90:hover {
   }
 
   .u-footer .u-text-2 {
-    margin-right: 31px;
+    margin-bottom: 50px;
+    margin-left: 31px;
   }
 }
 @media (max-width: 575px) {
   .u-footer .u-sheet-1 {
-    min-height: 36px;
+    min-height: 124px;
   }
 
   .u-footer .u-text-1 {
-    width: 340px;
+    margin-top: 84px;
     margin-right: 0;
+    width: 340px;
   }
 
   .u-footer .u-text-2 {
-    margin-right: 0;
+    margin-top: -56px;
+    margin-left: 0;
+    margin-bottom: 40px;
   }
 }
 
