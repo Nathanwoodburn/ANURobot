@@ -7,7 +7,7 @@
 
 body {
   background: #282828;
-  overflow: auto;
+  overflow-y:auto;
 }
 
 p {
@@ -15,6 +15,7 @@ p {
   font-size: 130px;
   margin: 10vh 0 0;
   text-align: center;
+  overflow-y:auto;
   letter-spacing: 5px;
   background-color: black;
   color: transparent;
@@ -31,6 +32,7 @@ code {
   color: #bdbdbd;
   text-align: left;
   display: block;
+  overflow-y:auto;
   font-size: 16px;
   margin: 0 30px 25px;
 }
@@ -47,6 +49,7 @@ code em {
 code b {
   color: #81a2be;
   font-weight: 500;
+  overflow-y:auto;
 }
 
 a {
@@ -54,6 +57,7 @@ a {
   font-family: monospace;
   font-size: 20px;
   text-decoration: underline;
+  overflow-y:auto;
   margin-top: 10px;
   display: inline-block;
 }
@@ -61,5 +65,6 @@ a {
 @media screen and (max-width: 880px) {
   p {
     font-size: 14vw;
+    overflow-y:auto;
   }
 }
