@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/404.css">
   <link rel="icon" type="image/png" href="/images/favicon2.jpg"/>
 <link rel="icon" type="image/png" href="https://anurobot.tech/images/favicon2.jpg"/>
-<meta http-equiv="refresh" content="8; URL=https://anurobot.tech" />
+
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -16,10 +16,25 @@
 <code><span>this_page</span>.<em>not_found</em> = true;</code>
 <code><span>if</span> (<b>you_spelt_it_wrong</b>){<br><span>try_again()</span>;<br>}</code>
 <code><span>else if</span> (<b>we_screwed_up</b>){<br><em>alert</em>(<i>"We're really sorry about that."</i>);<br><span>delay</span>(5000);<br><span>window</span>.<em>location</em> = home;<br>}</code>
+
 </div>
     </div>
 <!-- partial -->
   <script  src="/404.js"></script>
 
+  <script type="text/javascript">
+    function callback(){
+    return function(){
+        alert("We're really sorry about that.");
+        window.location = 'https://anurobot.tech';
+    }
+}
+var a = "world";
+setTimeout(callback(), 2000);
+    
+
+    </script>
+    
 </body>
+
 </html>
