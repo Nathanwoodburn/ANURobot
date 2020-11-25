@@ -50,24 +50,16 @@ void setup() { // To run once when arduino powered on
   pinMode(lmp2, OUTPUT);
   pinMode(lme, OUTPUT);
   pinMode(rme, OUTPUT);
-  //  HM10.println("Waiting. . ."); // tell user that the ardunio in waiting to connect
-  //  while (!HM10.available()) //Wait for user to respond
-  //  {
-  //    delay(2500); //wait
-  //    HM10.println("Waiting. . ."); //remind the user that the Arduino is waiting
-  //    delay(2500); //wait to stop the BT serial from crashing
-  //  }
-  //  input_char = HM10.read(); //read the user input to clear the input terminal
-  //  HM10.println("");
+  //Give info about the robot at startup
   HM10.println("Hello, my name is ANUROBOT.TECH");
   HM10.println("To find out more about me goto https://anurobot.tech");
   HM10.println("Thanks");
   HM10.println("");
 }
 void loop() {  // main code loop, to run repeatedly
-  HM10.println("Ready. . ."); //tell the user that the arduino is ready to control
-  readbt(); //read the user input
-  HM10.println("");
+  HM10.println("Ready. . ."); //tell the user that the arduino is ready for commands
+  readbt(); //read the user input from bluetooth (see below for function code)
+  HM10.println(""); //Write a blank line to bluetooth
   switch (input_char) // shorter IF/else if
   {
     case '8': // if the user sent 8
@@ -77,20 +69,7 @@ void loop() {  // main code loop, to run repeatedly
           left_sonar = sonar(tpin1, epin1); // read and store the left sonar reading
           HM10.println("Left sonar:"); // tell the user the value of the left sonar
           HM10.println(left_sonar);
-          if (left_sonar > (s_W - d_v_s) && left_sonar < (s_W + d_v_s)) // the left wall is about the right distance away
-          {
-            drive('F'); //go straight forward
-
-          }
-          else if (left_sonar <= (s_W - d_v_s)) // the left wall is too close
-          {
-            drive('S'); //go slight right
-          }
-          else if (left_sonar >= (s_W + d_v_s)) // the left wall is too far
-          {
-            drive('D'); //go slight left
-          }
-        }
+          driveautocorrect();
         else { // the front wall is too close to allow for driving forward
           HM10.println("Collision Avoidance code stopped your command"); //tell user that the front wall is too close
           // this makes the user know that the arduino is working properly and not just broken
@@ -215,11 +194,11 @@ void loop() {  // main code loop, to run repeatedly
       HM10.println("To exit Autonomous mode press the reset button");
 
       for (;;) { // infinite loop
-        Auto(); // Run the autunomous driving code
+        Auto(); // Run the autonomous driving code
       }
       break;
     case '?': // if the user sent ?
-      // tell the user all the commands to control the robot
+      // give the user a list of avaliable commands
       HM10.println("Sonar: S");
       HM10.println("Drive forward: 8");
       HM10.println("Drive forward without auto correct: 5");
@@ -265,295 +244,266 @@ void readbt() // function to wait for the user to send text then set input_char 
   }
 }
 void Auto() // function to control the rover autonomously
-{ //Note: All outputs have been commented to stop the BT from crashing
+{ //Note: Most bluetooth communication has been disabled to stop the BT from crashing
   long left_sonar; //create variables to store the Sonar readings
   long front_sonar;
   long right_sonar;
   left_sonar = sonar(tpin1, epin1); //set sonar variables to sonar reading
   front_sonar = sonar(tpin2, epin2);
   right_sonar = sonar(tpin3, epin3);
-  //tell the user the sonar reading - not in use to stop BT crashing
-  //  HM10.println("Left:");
-  //  HM10.println(left_sonar);
-  //  HM10.println("Front:");
-  //  HM10.println(front_sonar);
-  //  HM10.println("Right:");
-  //  HM10.println(right_sonar);
-
 
   if (left_sonar > l_t_d) //left turn found
   {
-
-    for (int i = 3; i > 0; i = i - 1)
+    // this code is forces the robot to center in the turn
+    for (int i = 3; i > 0; i = i - 1) // repeat code three times
     {
-      if (sonar(tpin2, epin2) > 3)
+      if (sonar(tpin2, epin2) > 3) // if there is room ahead
       {
-        drive('O');
+        drive('O'); // drive forwards
       }
     }
-    HM10.println("Turn left");
-    if (sonar(tpin1, epin1) > l_t_d) {
-      while (sonar(tpin2,epin2) < 9)
+
+    HM10.println("Turn left");  // give feedback to user
+    if (sonar(tpin1, epin1) > l_t_d) { // double check that the left wall if far enough to turn left
+      // reverse to set the distance to the front wall
+      while (sonar(tpin2, epin2) < 9) // while front wall is closer than 9 units
       {
-        drive('P');
+        drive('P'); // reverse
       }
       drive('4'); //turn left
-      for (int i = 5; i > 0; i = i - 1)
+      // this code stops the robot from detecting the corner again
+      for (int i = 8; i > 0; i = i - 1) // loop 8 times
       {
-        if (sonar(tpin2, epin2) > a_f_w)
+        if (sonar(tpin2, epin2) > a_f_w) // if there is room in front
         {
+          drive('O'); // drive forward twice
           drive('O');
-          drive('O');
-
         }
-
       }
     }
-    else// wall to the left
+    else // there is a wall to the left
     {
-      // HM10.println("Abort left turn");
+      HM10.println("Abort left turn"); // Alert User
     }
   }
 
 
   else if (front_sonar > a_f_w) //clear path ahead so drive forward
   {
-    //HM10.println("Forward");
-    //note: s_W = 4
-    if (left_sonar < s_W) //too close to the left wall
-    {
-      //HM10.println("Slight right");
-      drive('S'); //drive slight right
-    }
-    else if (left_sonar > s_W) //too close to right wall
-    {
-      // HM10.println("Slight left");
-      drive('D'); //drive slight left
-    }
-    else // right distance from the walls
-    {
-      //HM10.println("Straight forward");
-      drive('O'); // drive straight ahead
-    }
+    // code to center the robot in the middle of the vent
+    driveautocorrect();
   }
 
 
-  //all else after here happen when wall ahead
+  //  wall ahead
+
   else if (right_sonar > l_t_d) //right turn found
   {
 
-    //    for (int i = 4; i > 0; i = i - 1)
-    //    {
-    //      if (sonar(tpin2, epin2) > 3)
-    //      {
-    //        drive('O');
-    //      }
-    //    }
-    HM10.println("Turn Right");
-    if (sonar(tpin3, epin3) > l_t_d) {
-      while (sonar(tpin2, epin2) < 9)
+    HM10.println("Turn Right"); // give feedback to user
+    if (sonar(tpin3, epin3) > l_t_d) { // double check that there is enough room to turn right
+
+      // reverse to set the distance to the front wall
+      while (sonar(tpin2, epin2) < 9) // while front wall is closer than 9 units
       {
-        drive('P');
+        drive('P'); // reverse
       }
-      if (sonar(tpin1,epin1) > l_t_d)
+
+      if (sonar(tpin1, epin1) > l_t_d) // if there is enough room to turn left
       {
-        HM10.println("Error 001");
+        HM10.println("Was turning right but found Left turn"); // tell user there was an error in the measurements
       }
       else
       {
-      drive('6'); //turn right
+        drive('6'); //turn right
       }
-      for (int i = 4; i > 0; i = i - 1)
+
+      // make sure the robot doesn't find the turn again
+      for (int i = 8; i > 0; i = i - 1) // loop 8 times
       {
-        if (sonar(tpin2, epin2) > a_f_w)
+        if (sonar(tpin2, epin2) > a_f_w) // if there is room in front
         {
+          drive('O'); // drive forward twice
           drive('O');
         }
       }
-      //new
-      drive('O');
+      drive('O'); // drive forwards once more just to be sure
     }
-    else// wall to the left
+    else // right wall too close
     {
-      HM10.println("Abort left turn");
+      HM10.println("Abort right turn"); // Alert user
     }
   }
 
-
+  // its a dead end
   else if (front_sonar > t_d) //if enough room turn around
   {
 
-    HM10.println("U-turn");
-    drive('B'); //u-turn
+    HM10.println("U-turn"); // Tell user whats happening
+    drive('B'); // u-turn
   }
 
-  else
+  else // there isn't enough room to perform a u-turn
   {
-    while (sonar(tpin2, epin2) > 6)
+    while (sonar(tpin2, epin2) > 6) // while the front wall in closer than 6 units
     {
-      drive('O');
+      drive('O'); // drive forwards
     }
-    //drive('Q');
-    if (sonar(tpin1, epin1) <= l_t_d)
+
+    if (sonar(tpin1, epin1) <= l_t_d) // if the left wall is close enough
     {
-      if (sonar(tpin3, epin3) <= l_t_d)
+      if (sonar(tpin3, epin3) <= l_t_d) // if the right wall is close enough
       {
-        if (sonar(tpin2, epin2) <= 6)
+        if (sonar(tpin2, epin2) <= 6) // if the left wall is closer than 6 units
         {
-          //HM10.println("TEST");
-          drive('B');
+          drive('B'); // u-turn
         }
         else
         {
-          HM10.println("Break 1");
-          while (sonar(tpin2, epin2) > 6)
+          HM10.println("Break 1"); // tell user where it is in the code
+          while (sonar(tpin2, epin2) > 6) // while the front wall is closer than 6 units
           {
-            drive('O');
+            drive('O'); // drive forwards
           }
-          if (sonar(tpin1, epin1) > l_t_d)
+          if (sonar(tpin1, epin1) > l_t_d) // there is a left turn
           {
-            drive('Q');
+            drive('Q'); // reverse
             drive('4'); //turn left
-            for (int i = 3; i > 0; i = i - 1)
+
+            // make sure the robot doesn't detect that turn again
+            for (int i = 3; i > 0; i = i - 1) // repeat code three times
             {
-              if (sonar(tpin2, epin2) > a_f_w)
+              if (sonar(tpin2, epin2) > a_f_w) // if front wall if far enough ahead
               {
-                drive('O');
+                drive('O'); // drive forwards
               }
             }
-            drive('O');
+            drive('O'); // drive forward twice to be extra sure
             drive('O');
           }
-          else if (sonar(tpin3, epin3) > l_t_d)
+          else if (sonar(tpin3, epin3) > l_t_d) // there is a right turn
           {
-            drive('Q');
-            drive('6'); //turn left
-            for (int i = 3; i > 0; i = i - 1)
+            drive('Q'); // Reverse
+            drive('6'); //turn right
+
+            // make sure the robot doesn't detect that turn again
+            for (int i = 3; i > 0; i = i - 1) // repeat code three times
             {
-              if (sonar(tpin2, epin2) > a_f_w)
+              if (sonar(tpin2, epin2) > a_f_w) // if front wall if far enough ahead
               {
-                drive('O');
+                drive('O'); // drive forwards
               }
             }
-            drive('O');
+            drive('O'); // drive forward twice to be extra sure
             drive('O');
           }
-          else
+          else // if there is a dead end
           {
-            while (sonar(tpin1, epin1) < t_d)
+            while (sonar(tpin1, epin1) < t_d) // while the front distance is too small to u-turn
             {
-              drive('Q');
+              drive('Q'); // reverse
             }
-            drive('B');
+            drive('B'); // u-turn
           }
         }
       }
     }
 
   }
-
-
-  //  else // else reverse than u-turn
-  //  {
-  //     HM10.println("Reverse");
-  //    //readbt();
-  //    drive('Q'); //reverse
-  //    HM10.println("U-turn");
-  //    drive('B'); //then u-turn
-  //  }
-  // temporary code to debug problems
-  // HM10.println("Press enter to continue. . ."); // tell user that robot is waiting
-  //readbt(); // wait until user sends text
-  //delay(500); //delay than loop again //will take out when finished testing
-
+}
+void driveautocorrect(){
+if (sonar(tpin1,epin1) < s_W) // left wall too close
+    {
+      drive('S'); //drive slight right
+    }
+    else if (sonar(tpin1,epin1) > s_W) // right wall too close
+    {
+      drive('D'); //drive slight left
+    }
+    else // the robot is centered
+    {
+      drive('O'); // drive straight ahead
+    }
 }
 void drive(char dir) // Function to control the driving of the rover
 {
   // Commands are as follows:
   // forward F; left L; right R; Turn around B; slight right S; slight left D;
   // reverse Q; far forwards H; turn around a corner left 4; right 6; small reverse P; small forwards O
+
+
   digitalWrite(lme, HIGH);//turn motors on
   digitalWrite(rme, HIGH);
   switch (dir) // shorter if/else if
   {
-    case 'O':
-      //HM10.println("Driving forward. . .");
+    case 'O': // if the command sent was 'O'
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
-      delay(100); //wait 1 sec
+      delay(100); //wait 0.1 sec
       break;
-    case 'F':
-      //    HM10.println("Driving forward. . .");
+    case 'F': // if the command sent was 'F'
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(1000); //wait 1 sec
       break;
-    case 'P':
+    case 'P': // if the command sent was 'P'
+      // Turn both motors on backwards
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
-      delay(500); // wait 1 sec
+      delay(500); // wait 0.5 sec
       break;
-    case 'H':
-      //  HM10.println("Driving forward. . .");
+    case 'H': // if the command sent was 'H'
       // Turn both motors on forwards
       digitalWrite(lmp1, HIGH);
       digitalWrite(rmp1, HIGH);
       delay(2000); // wait 2 sec
       break;
-    case 'L':
-      //   HM10.println("Turning left. . .");
+    case 'L': // if the command sent was 'L'
       digitalWrite(lmp2, HIGH); // Turn left motor backwards
       digitalWrite(rmp1, HIGH); // Turn right motor forwards
       delay(1500); // wait 1.5 sec
       break;
     case 'R':
-      //   HM10.println("Turning right. . .");
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
       delay(1500); // Wiat 1.5 sec
       break;
-    case 'B':
-      //  HM10.println("Turning around. . .");
+    case 'B': // if the command sent was 'B'
       digitalWrite(lmp1, HIGH); // Turn left motor forwards
       digitalWrite(rmp2, HIGH); // Turn right motor backwards
-      delay(3200); // wait 3 sec
+      delay(3200); // wait 3.2 sec
       break;
-    case 'S':
-      //  HM10.println("Drive slight right. . .");
+    case 'S': // if the command sent was 'S'
       digitalWrite(lmp1, HIGH); // turn left motor forwards
-      delay(200); // wait 0.5 sec
+      delay(200); // wait 0.2 sec
       digitalWrite(rmp1, HIGH); // turn right motor forwards
-      delay(100); // wait 0.4 sec
+      delay(100); // wait 0.1 sec
       break;
-    case '3':
-      digitalWrite(lmp2, HIGH); // turn left motor forwards
-      delay(400); // wait 0.5 sec
-      digitalWrite(rmp2, HIGH); // turn right motor forwards
-      delay(100); // wait 0.4 sec
+    case '3': // if the command sent was '3'
+      digitalWrite(lmp2, HIGH); // turn left motor backwards
+      delay(400); // wait 0.4 sec
+      digitalWrite(rmp2, HIGH); // turn right motor backwards
+      delay(100); // wait 0.1 sec
       break;
-    case 'D':
-      //   HM10.println("Drive slight left. . .");
+    case 'D': // if the command sent was 'D'
       digitalWrite(rmp1, HIGH); // turn right motor forwards
-      delay(200); // wait 0.5 sec
+      delay(200); // wait 0.2 sec
       digitalWrite(lmp1, HIGH); // turn left motor forwards
-      delay(100); // wait 0.4 sec
+      delay(100); // wait 0.1 sec
       break;
-    case 'Q':
-      //  HM10.println("Reversing. . .");
+    case 'Q': // if the command sent was 'Q'
       // turn both motors on backwards
       digitalWrite(lmp2, HIGH);
       digitalWrite(rmp2, HIGH);
       delay(1000); // wait 1 sec
       break;
-    case '4':
-      //  HM10.println("Turning left. . .");
+    case '4': // if the command sent was '4'
       digitalWrite(rmp1, HIGH); // turn right motor forwards
       delay(t_t); // wait for the prechosen time
       break;
-    case '6':
-      //   HM10.println("Turning right. . .");
+    case '6': // if the command sent was '6'
       digitalWrite(lmp1, HIGH); // turn left motor forwards
       delay(t_t); // wait for the prechosen time
       break;
@@ -570,14 +520,14 @@ void drive(char dir) // Function to control the driving of the rover
 }
 long sonar(int triggerPin, int echoPin) // function calculate and return sonar readings
 {
-  pinMode(triggerPin, OUTPUT);  // Clear the trigger
-  digitalWrite(triggerPin, LOW);
-  delayMicroseconds(2);
+  pinMode(triggerPin, OUTPUT);  // set pinmode of the triggerPin to output
+  digitalWrite(triggerPin, LOW); // Clear the trigger
+  delayMicroseconds(2); // for 2 microseconds
   // Sets the trigger pin to HIGH state for 10 microseconds
-  digitalWrite(triggerPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(triggerPin, LOW);
-  pinMode(echoPin, INPUT);
+  digitalWrite(triggerPin, HIGH); // turn pin on
+  delayMicroseconds(10); // wait 10 microseconds
+  digitalWrite(triggerPin, LOW); // then turn it off
+  pinMode(echoPin, INPUT); // set pinmode of echopin to input
   // Reads the echo pin, and returns the sound wave travel time in microseconds
   long pulsein1 = pulseIn(echoPin, HIGH);
   // calculate the distance in centimeters
