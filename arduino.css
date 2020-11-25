@@ -3,7 +3,7 @@
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 1567px;
+  min-height: 1077px;
 }
 
 .u-section-1 .u-text-1 {
@@ -16,13 +16,33 @@
   font-size: 1.125rem;
   letter-spacing: 1px;
   font-weight: 700;
-  margin: 17px 148px 0 auto;
+  margin: 17px auto 0;
 }
 
 .u-section-1 .u-tabs-1 {
-  min-height: 692px;
+  min-height: 688px;
   height: auto;
-  margin: 58px -41px 60px auto;
+  margin: 58px 30px -430px;
+}
+
+.u-section-1 .u-tab-list-1 {
+  background-image: none;
+}
+
+.u-section-1 .u-tab-link-1 {
+  background-image: none;
+}
+
+.u-section-1 .u-tab-link-2 {
+  background-image: none;
+}
+
+.u-section-1 .u-tab-link-3 {
+  background-image: none;
+}
+
+.u-section-1 .u-tab-pane-1 {
+  background-image: none;
 }
 
 .u-section-1 .u-container-layout-1 {
@@ -32,7 +52,12 @@
 .u-section-1 .u-custom-html-1 {
   min-height: 479px;
   height: auto;
-  margin: 0 80px 0 0;
+  width: 1080px;
+  margin: 0 auto;
+}
+
+.u-section-1 .u-tab-pane-2 {
+  background-image: none;
 }
 
 .u-section-1 .u-container-layout-2 {
@@ -52,6 +77,10 @@
   min-height: 479px;
   height: auto;
   margin: 36px 20px 0 0;
+}
+
+.u-section-1 .u-tab-pane-3 {
+  background-image: none;
 }
 
 .u-section-1 .u-container-layout-3 {
@@ -79,10 +108,6 @@
     margin-right: 73px;
   }
 
-  .u-section-1 .u-btn-1 {
-    margin-right: 0;
-  }
-
   .u-section-1 .u-tabs-1 {
     margin-top: -479px;
     margin-right: initial;
@@ -91,8 +116,7 @@
 
   .u-section-1 .u-custom-html-1 {
     margin-top: -35px;
-    margin-right: initial;
-    margin-left: initial;
+    width: 940px;
   }
 
   .u-section-1 .u-custom-html-2 {
@@ -111,12 +135,20 @@
     margin-left: 56px;
     margin-right: 56px;
   }
+
+  .u-section-1 .u-custom-html-1 {
+    width: 720px;
+  }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-text-1 {
     margin-left: 42px;
     margin-right: 42px;
+  }
+
+  .u-section-1 .u-custom-html-1 {
+    width: 540px;
   }
 
   .u-section-1 .u-container-layout-2 {
@@ -142,8 +174,7 @@
 
   .u-section-1 .u-custom-html-1 {
     margin-top: -544px;
-    margin-right: initial;
-    margin-left: initial;
+    width: 340px;
   }
 
   .u-section-1 .u-btn-2 {
