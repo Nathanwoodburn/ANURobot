@@ -69,7 +69,7 @@ void loop() {  // main code loop, to run repeatedly
           left_sonar = sonar(tpin1, epin1); // read and store the left sonar reading
           HM10.println("Left sonar:"); // tell the user the value of the left sonar
           HM10.println(left_sonar);
-          driveautocorrect();
+          driveautocorrect(); // code to center the robot in the vent
         else { // the front wall is too close to allow for driving forward
           HM10.println("Collision Avoidance code stopped your command"); //tell user that the front wall is too close
           // this makes the user know that the arduino is working properly and not just broken
@@ -411,7 +411,7 @@ void Auto() // function to control the rover autonomously
 
   }
 }
-void driveautocorrect(){
+void driveautocorrect(){ // code to center the robot in the vent
 if (sonar(tpin1,epin1) < s_W) // left wall too close
     {
       drive('S'); //drive slight right
