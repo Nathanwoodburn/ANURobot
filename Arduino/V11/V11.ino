@@ -591,7 +591,7 @@ void loop() {  // main code loop, to run repeatedly
     // calculate the distance in centimeters
     return 0.01723 * pulsein1;
   }
-  void Auto2() // function to control the rover autonomously
+  void Auto2() // function to control the rover autonomously by following the right wall
   { //Note: Most bluetooth communication has been disabled to stop the BT from crashing
     long left_sonar; //create variables to store the Sonar readings
     long front_sonar;
@@ -600,7 +600,7 @@ void loop() {  // main code loop, to run repeatedly
     front_sonar = sonar(tpin2, epin2);
     right_sonar = sonar(tpin3, epin3);
 
-    if (right_sonar > l_t_d) //left turn found
+    if (right_sonar > l_t_d) // right turn found
     {
       // this code is forces the robot to center in the turn
       for (int i = 3; i > 0; i = i - 1) // repeat code three times
@@ -646,7 +646,7 @@ void loop() {  // main code loop, to run repeatedly
 
     //  wall ahead
 
-    else if (left_sonar > l_t_d) //right turn found
+    else if (left_sonar > l_t_d) // left turn found
     {
 
       HM10.println("Turn Left"); // give feedback to user
@@ -660,7 +660,7 @@ void loop() {  // main code loop, to run repeatedly
 
         if (sonar(tpin3, epin3) > l_t_d) // if there is enough room to turn left
         {
-          HM10.println("Was turning right but found Left turn"); // tell user there was an error in the measurements
+          HM10.println("Was turning left but found right turn"); // tell user there was an error in the measurements
            drive('6'); //turn right
         }
         else
@@ -700,25 +700,24 @@ void loop() {  // main code loop, to run repeatedly
         drive('O'); // drive forwards
       }
 
-      if (sonar(tpin3, epin3) <= l_t_d) // if the left wall is close enough
+      if (sonar(tpin3, epin3) <= l_t_d) // if the right wall is close enough
       {
-        if (sonar(tpin1, epin1) <= l_t_d) // if the right wall is close enough
+        if (sonar(tpin1, epin1) <= l_t_d) // if the left wall is close enough
         {
-          if (sonar(tpin2, epin2) <= 6) // if the left wall is closer than 6 units
+          if (sonar(tpin2, epin2) <= 6) // if the front wall is closer than 6 units
           {
             drive('B'); // u-turn
           }
           else
           {
-            HM10.println("Break 1"); // tell user where it is in the code
             while (sonar(tpin2, epin2) > 6) // while the front wall is closer than 6 units
             {
               drive('O'); // drive forwards
             }
-            if (sonar(tpin3, epin3) > l_t_d) // there is a left turn
+            if (sonar(tpin3, epin3) > l_t_d) // there is a right turn
             {
               drive('Q'); // reverse
-              drive('6'); //turn left
+              drive('6'); //turn right
 
               // make sure the robot doesn't detect that turn again
               for (int i = 3; i > 0; i = i - 1) // repeat code three times
@@ -731,10 +730,10 @@ void loop() {  // main code loop, to run repeatedly
               drive('O'); // drive forward twice to be extra sure
               drive('O');
             }
-            else if (sonar(tpin1, epin1) > l_t_d) // there is a right turn
+            else if (sonar(tpin1, epin1) > l_t_d) // there is a left turn
             {
               drive('Q'); // Reverse
-              drive('4'); //turn right
+              drive('4'); //turn left
 
               // make sure the robot doesn't detect that turn again
               for (int i = 3; i > 0; i = i - 1) // repeat code three times
@@ -758,6 +757,5 @@ void loop() {  // main code loop, to run repeatedly
           }
         }
       }
-
     }
   }
