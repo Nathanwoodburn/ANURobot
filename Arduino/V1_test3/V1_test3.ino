@@ -135,7 +135,7 @@ void loop() {
     case 'I':
       HM10.println("");
       HM10.println("Code made by Nathan Woodburn");
-      HM10.println("For more info on this project goto https://www.anurobot.tk");
+      HM10.println("For more info on this project goto https://nathan.woodburn.au/ANURobot/");
       break;
 
     default:
